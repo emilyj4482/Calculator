@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
             buttonArea.heightAnchor.constraint(equalToConstant: 500),
             
             resultLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
-            resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor),
+            resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
             
             processLabel.trailingAnchor.constraint(equalTo: resultLabel.trailingAnchor),
             processLabel.bottomAnchor.constraint(equalTo: resultLabel.topAnchor)
