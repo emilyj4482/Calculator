@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  EmilysCalculator
 //
 //  Created by EMILY on 28/10/2024.
@@ -9,17 +9,32 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    private lazy var testLabel: UILabel = {
+    private lazy var processLabel: UILabel = {
         let label = UILabel()
         
-        label.textColor = .black
-        label.font = .preferredFont(forTextStyle: .extraLargeTitle)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 35, weight: .regular)
+        // label.isHidden = true
         
         return label
     }()
     
+    private lazy var resultLabel: UILabel = {
+        let label = UILabel()
+        
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 75, weight: .medium)
+        
+        return label
+    }()
+    
+    private lazy var buttonArea: UIView = ButtonArea()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // preview를 위한 임시 조치
+        view.backgroundColor = .black
         
         addSubview()
         layout()
@@ -27,23 +42,36 @@ class MainViewController: UIViewController {
     }
     
     private func addSubview() {
-        view.addSubview(testLabel)
-        testLabel.translatesAutoresizingMaskIntoConstraints = false
+        [processLabel, resultLabel, buttonArea]
+            .forEach {
+                view.addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
     }
     
     private func layout() {
         
         let superView = view.safeAreaLayoutGuide
         
+        let inset: CGFloat = 16.0
+        
         NSLayoutConstraint.activate([
-            testLabel.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
-            testLabel.centerYAnchor.constraint(equalTo: superView.centerYAnchor)
+            buttonArea.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: inset),
+            buttonArea.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset),
+            buttonArea.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset),
+            buttonArea.heightAnchor.constraint(equalToConstant: 500),
+            
+            resultLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
+            resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor),
+            
+            processLabel.trailingAnchor.constraint(equalTo: resultLabel.trailingAnchor),
+            processLabel.bottomAnchor.constraint(equalTo: resultLabel.topAnchor)
         ])
     }
     
     private func bind() {
-        testLabel.text = "Hello"
-        
+        resultLabel.text = "32,416.67"
+        processLabel.text = "778,000÷24"
     }
     
 }
