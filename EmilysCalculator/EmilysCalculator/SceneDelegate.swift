@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         // screen 크기 전송
-        let vm = MainViewModel()
+        let vm = MainViewModel.shared
         vm.screen.send((width: windowScene.screen.bounds.width, height: windowScene.screen.bounds.height))
     }
 

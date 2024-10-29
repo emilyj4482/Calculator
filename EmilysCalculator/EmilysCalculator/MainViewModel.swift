@@ -10,11 +10,13 @@ import Combine
 
 final class MainViewModel {
     
-    var cancellables = Set<AnyCancellable>()
+    static let shared = MainViewModel()
     
-    // default size : iPhone 16 Pro : 402 * 874
-    let screen = CurrentValueSubject<(width: CGFloat, height: CGFloat), Never>((402, 874))
+    private var cancellables = Set<AnyCancellable>()
     
+    let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
+    
+    // screen size debugging
     init() {
         screen
             .sink {

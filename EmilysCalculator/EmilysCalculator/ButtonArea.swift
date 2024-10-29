@@ -9,29 +9,82 @@ import UIKit
 
 class ButtonArea: UIView {
     
-    private var testButton: Button = {
+    private lazy var ACButton: Button = {
         let button = Button()
         
         button.setTitle("AC")
         button.addAction("AC")
+        button.setColor(.darkGray)
         
         return button
     }()
     
-    private var testButton2: Button = {
+    private lazy var plusMinusButton: Button = {
         let button = Button()
         
         button.setTitle("+/-")
         button.addAction("+/-")
+        button.setColor(.darkGray)
         
         return button
     }()
     
-    private var testButton3: Button = {
+    private lazy var percentButton: Button = {
         let button = Button()
         
         button.setTitle("%")
         button.addAction("%")
+        button.setColor(.darkGray)
+        
+        return button
+    }()
+    
+    private lazy var divideButton: Button = {
+        let button = Button()
+        
+        button.setTitle("/")
+        button.addAction("/")
+        button.setColor(.orange)
+        
+        return button
+    }()
+    
+    private lazy var multiplyButton: Button = {
+        let button = Button()
+        
+        button.setTitle("x")
+        button.addAction("x")
+        button.setColor(.orange)
+        
+        return button
+    }()
+    
+    private lazy var substractButton: Button = {
+        let button = Button()
+        
+        button.setTitle("-")
+        button.addAction("-")
+        button.setColor(.orange)
+        
+        return button
+    }()
+    
+    private lazy var addButton: Button = {
+        let button = Button()
+        
+        button.setTitle("+")
+        button.addAction("+")
+        button.setColor(.orange)
+        
+        return button
+    }()
+    
+    private lazy var equalButton: Button = {
+        let button = Button()
+        
+        button.setTitle("=")
+        button.addAction("=")
+        button.setColor(.orange)
         
         return button
     }()
@@ -48,7 +101,7 @@ class ButtonArea: UIView {
     }
     
     private func addSubview() {
-        [testButton, testButton2, testButton3]
+        [ACButton, plusMinusButton, percentButton, divideButton, multiplyButton, substractButton, addButton, equalButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -60,14 +113,29 @@ class ButtonArea: UIView {
         let inset: CGFloat = 8.0
         
         NSLayoutConstraint.activate([
-            testButton.topAnchor.constraint(equalTo: topAnchor),
-            testButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            ACButton.topAnchor.constraint(equalTo: topAnchor),
+            ACButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            testButton2.topAnchor.constraint(equalTo: testButton.topAnchor),
-            testButton2.leadingAnchor.constraint(equalTo: testButton.trailingAnchor, constant: inset),
+            plusMinusButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            plusMinusButton.leadingAnchor.constraint(equalTo: ACButton.trailingAnchor, constant: inset),
             
-            testButton3.topAnchor.constraint(equalTo: testButton.topAnchor),
-            testButton3.leadingAnchor.constraint(equalTo: testButton2.trailingAnchor, constant: inset),
+            percentButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            percentButton.leadingAnchor.constraint(equalTo: plusMinusButton.trailingAnchor, constant: inset),
+            
+            divideButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            divideButton.leadingAnchor.constraint(equalTo: percentButton.trailingAnchor, constant: inset),
+            
+            multiplyButton.topAnchor.constraint(equalTo: divideButton.bottomAnchor, constant: inset),
+            multiplyButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            
+            substractButton.topAnchor.constraint(equalTo: multiplyButton.bottomAnchor, constant: inset),
+            substractButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            
+            addButton.topAnchor.constraint(equalTo: substractButton.bottomAnchor, constant: inset),
+            addButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            
+            equalButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: inset),
+            equalButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
         ])
     }
 }
