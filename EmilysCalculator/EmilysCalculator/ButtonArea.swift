@@ -14,7 +14,7 @@ class ButtonArea: UIView {
         
         button.setTitle("AC")
         button.addAction("AC")
-        button.setColor(.darkGray)
+        button.setColor(.status)
         
         return button
     }()
@@ -24,7 +24,7 @@ class ButtonArea: UIView {
         
         button.setTitle("+/-")
         button.addAction("+/-")
-        button.setColor(.darkGray)
+        button.setColor(.status)
         
         return button
     }()
@@ -34,7 +34,7 @@ class ButtonArea: UIView {
         
         button.setTitle("%")
         button.addAction("%")
-        button.setColor(.darkGray)
+        button.setColor(.status)
         
         return button
     }()
@@ -44,7 +44,7 @@ class ButtonArea: UIView {
         
         button.setTitle("/")
         button.addAction("/")
-        button.setColor(.orange)
+        button.setColor(.operator)
         
         return button
     }()
@@ -54,7 +54,7 @@ class ButtonArea: UIView {
         
         button.setTitle("x")
         button.addAction("x")
-        button.setColor(.orange)
+        button.setColor(.operator)
         
         return button
     }()
@@ -64,7 +64,7 @@ class ButtonArea: UIView {
         
         button.setTitle("-")
         button.addAction("-")
-        button.setColor(.orange)
+        button.setColor(.operator)
         
         return button
     }()
@@ -74,7 +74,7 @@ class ButtonArea: UIView {
         
         button.setTitle("+")
         button.addAction("+")
-        button.setColor(.orange)
+        button.setColor(.operator)
         
         return button
     }()
@@ -84,7 +84,118 @@ class ButtonArea: UIView {
         
         button.setTitle("=")
         button.addAction("=")
-        button.setColor(.orange)
+        button.setColor(.operator)
+        
+        return button
+    }()
+    
+    private lazy var sevenButton: Button = {
+        let button = Button()
+        
+        button.setTitle("7")
+        button.addAction("7")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var eightButton: Button = {
+        let button = Button()
+        
+        button.setTitle("8")
+        button.addAction("8")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var nineButton: Button = {
+        let button = Button()
+        
+        button.setTitle("9")
+        button.addAction("9")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var fourButton: Button = {
+        let button = Button()
+        
+        button.setTitle("4")
+        button.addAction("4")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var fiveButton: Button = {
+        let button = Button()
+        
+        button.setTitle("5")
+        button.addAction("5")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var sixButton: Button = {
+        let button = Button()
+        
+        button.setTitle("6")
+        button.addAction("6")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var oneButton: Button = {
+        let button = Button()
+        
+        button.setTitle("1")
+        button.addAction("1")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var twoButton: Button = {
+        let button = Button()
+        
+        button.setTitle("2")
+        button.addAction("2")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var threeButton: Button = {
+        let button = Button()
+        
+        button.setTitle("3")
+        button.addAction("3")
+        button.setColor(.number)
+        
+        return button
+    }()
+    
+    private lazy var zeroButton: Button = {
+        let button = Button()
+        
+        button.setTitle("0")
+        button.addAction("0")
+        button.setColor(.number)
+        button.isZero.send(true)
+        
+        return button
+    }()
+    
+    private lazy var dotButton: Button = {
+        let button = Button()
+        
+        button.setTitle(".")
+        button.addAction(".")
+        button.setColor(.number)
         
         return button
     }()
@@ -101,7 +212,7 @@ class ButtonArea: UIView {
     }
     
     private func addSubview() {
-        [ACButton, plusMinusButton, percentButton, divideButton, multiplyButton, substractButton, addButton, equalButton]
+        [ACButton, plusMinusButton, percentButton, divideButton, multiplyButton, substractButton, addButton, equalButton, sevenButton, eightButton, nineButton, fourButton, fiveButton, sixButton, oneButton, twoButton, threeButton, zeroButton, dotButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,6 +220,11 @@ class ButtonArea: UIView {
     }
     
     private func layout() {
+        
+        guard
+            let oneButtonLabel = oneButton.titleLabel,
+            let zeroButtonLabel = zeroButton.titleLabel
+        else { return }
         
         let inset: CGFloat = 8.0
         
@@ -136,6 +252,42 @@ class ButtonArea: UIView {
             
             equalButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: inset),
             equalButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            
+            sevenButton.topAnchor.constraint(equalTo: ACButton.bottomAnchor, constant: inset),
+            sevenButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            
+            eightButton.topAnchor.constraint(equalTo: sevenButton.topAnchor),
+            eightButton.leadingAnchor.constraint(equalTo: sevenButton.trailingAnchor, constant: inset),
+            
+            nineButton.topAnchor.constraint(equalTo: sevenButton.topAnchor),
+            nineButton.leadingAnchor.constraint(equalTo: eightButton.trailingAnchor, constant: inset),
+            
+            fourButton.topAnchor.constraint(equalTo: sevenButton.bottomAnchor, constant: inset),
+            fourButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            
+            fiveButton.topAnchor.constraint(equalTo: fourButton.topAnchor),
+            fiveButton.leadingAnchor.constraint(equalTo: fourButton.trailingAnchor, constant: inset),
+            
+            sixButton.topAnchor.constraint(equalTo: fourButton.topAnchor),
+            sixButton.leadingAnchor.constraint(equalTo: fiveButton.trailingAnchor, constant: inset),
+            
+            oneButton.topAnchor.constraint(equalTo: fourButton.bottomAnchor, constant: inset),
+            oneButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            
+            twoButton.topAnchor.constraint(equalTo: oneButton.topAnchor),
+            twoButton.leadingAnchor.constraint(equalTo: oneButton.trailingAnchor, constant: inset),
+            
+            threeButton.topAnchor.constraint(equalTo: oneButton.topAnchor),
+            threeButton.leadingAnchor.constraint(equalTo: twoButton.trailingAnchor, constant: inset),
+            
+            zeroButton.topAnchor.constraint(equalTo: oneButton.bottomAnchor, constant: inset),
+            zeroButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            
+            dotButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
+            dotButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
+            
+            // 0 button text 위치
+            zeroButtonLabel.leadingAnchor.constraint(equalTo: oneButtonLabel.leadingAnchor)
         ])
     }
 }
