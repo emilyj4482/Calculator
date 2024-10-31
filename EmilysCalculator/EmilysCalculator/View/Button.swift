@@ -62,6 +62,10 @@ class Button: UIButton {
         addAction(buttonTapped, for: .touchUpInside)
     }
     
+    func addAction2(_ action : UIAction) {
+        addAction(action, for: .touchUpInside)
+    }
+    
     func setColor(_ color: UIColor) {
         backgroundColor = color
     }

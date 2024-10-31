@@ -66,7 +66,6 @@ class MainViewController: UIViewController {
             buttonArea.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: inset),
             buttonArea.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset),
             buttonArea.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset),
-            // buttonArea.heightAnchor.constraint(equalToConstant: 500),
             
             resultLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
             resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
@@ -86,8 +85,8 @@ class MainViewController: UIViewController {
     }
     
     private func bind() {
-        resultLabel.text = "32,416.67"
-        processLabel.text = "778,000÷24"
+        resultLabel.text = "0"
+        processLabel.text = ""
     }
     
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class ButtonArea: UIView {
     
+    let service = ButtonTapService()
+    
     private lazy var ACButton: Button = {
         let button = Button()
         
@@ -183,9 +185,10 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setTitle("0")
-        button.addAction("0")
+        // button.addAction("0")
         button.setColor(.number)
         button.isZero.send(true)
+        button.addAction2(service.testAction)
         
         return button
     }()
