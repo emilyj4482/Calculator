@@ -66,6 +66,20 @@ class Button: UIButton {
         addAction(action, for: .touchUpInside)
     }
     
+    func setButton(_ title: String) {
+        setTitle(title, for: .normal)
+        
+        let buttonTapped = UIAction { [weak self] _ in
+            if self?.vm.testString == "0" {
+                self?.vm.testString = title
+            } else {
+                self?.vm.testString += title
+            }
+        }
+            
+        addAction(buttonTapped, for: .touchUpInside)
+    }
+    
     func setColor(_ color: UIColor) {
         backgroundColor = color
     }

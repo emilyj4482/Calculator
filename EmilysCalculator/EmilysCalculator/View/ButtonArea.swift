@@ -94,8 +94,9 @@ class ButtonArea: UIView {
     private lazy var sevenButton: Button = {
         let button = Button()
         
-        button.setTitle("7")
-        button.addAction("7")
+        // button.setTitle("7")
+        // button.addAction("7")
+        button.setButton("7")
         button.setColor(.number)
         
         return button

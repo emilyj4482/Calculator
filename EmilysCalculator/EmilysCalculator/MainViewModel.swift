@@ -19,4 +19,6 @@ final class MainViewModel {
     
     // let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
     
+    
+    @Published var testString: String = "0"
 }

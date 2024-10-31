@@ -43,7 +43,8 @@ class MainViewController: UIViewController {
         
         addSubview()
         layout()
-        bind()
+        // bind()
+        sink()
     }
     
     private func addSubview() {
@@ -87,6 +88,14 @@ class MainViewController: UIViewController {
     private func bind() {
         resultLabel.text = "0"
         processLabel.text = ""
+    }
+    
+    private func sink() {
+        vm.$testString
+            .sink { [weak self] text in
+                self?.resultLabel.text = text
+            }
+            .store(in: &cancellables)
     }
     
 }
