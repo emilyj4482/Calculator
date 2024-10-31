@@ -179,12 +179,13 @@ class ButtonArea: UIView {
         return button
     }()
     
-    private var zeroButton: Button = {
+    private lazy var zeroButton: Button = {
         let button = Button()
         
         button.setTitle("0")
         button.addAction("0")
         button.setColor(.number)
+        button.isZero.send(true)
         
         return button
     }()
@@ -219,6 +220,11 @@ class ButtonArea: UIView {
     }
     
     private func layout() {
+        
+        guard
+            let oneButtonLabel = oneButton.titleLabel,
+            let zeroButtonLabel = zeroButton.titleLabel
+        else { return }
         
         let inset: CGFloat = 8.0
         
@@ -279,6 +285,9 @@ class ButtonArea: UIView {
             
             dotButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
             dotButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
+            
+            // 0 button text 위치
+            zeroButtonLabel.leadingAnchor.constraint(equalTo: oneButtonLabel.leadingAnchor)
         ])
     }
 }

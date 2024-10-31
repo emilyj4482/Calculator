@@ -14,6 +14,8 @@ class Button: UIButton {
     
     let vm = MainViewModel.shared
     
+    let isZero: CurrentValueSubject<Bool, Never> = .init(false)
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -33,10 +35,16 @@ class Button: UIButton {
     }
     
     private func setButtonSize() {
-        // button width = (screen.width - 16 * 2 - 8 * 3) / 4
+        // default button width = (screen.width - 16 * 2 - 8 * 3) / 4
+        // zero button width = (screen.width - 16 * 2 - 8) / 2
         vm.screen
-            .sink { [weak self] screen in
-                self?.widthAnchor.constraint(equalToConstant: (screen.width - 56) / 4).isActive = true
+            .combineLatest(isZero)
+            .sink { [weak self] screen, isZero in
+                if isZero {
+                    self?.widthAnchor.constraint(equalToConstant: (screen.width - 40) / 2).isActive = true
+                } else {
+                    self?.widthAnchor.constraint(equalToConstant: (screen.width - 56) / 4).isActive = true
+                }
                 self?.heightAnchor.constraint(equalToConstant: (screen.width - 56) / 4).isActive = true
                 self?.layer.cornerRadius = (screen.width - 56) / 8
             }
