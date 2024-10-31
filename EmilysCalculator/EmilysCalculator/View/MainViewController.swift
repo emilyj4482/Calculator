@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
         
         label.textColor = .darkGray
         label.font = .systemFont(ofSize: 35, weight: .regular)
+        label.textAlignment = .right
         // label.isHidden = true
         
         return label
@@ -29,6 +30,7 @@ class MainViewController: UIViewController {
         
         label.textColor = .white
         label.font = .systemFont(ofSize: 75, weight: .medium)
+        label.textAlignment = .right
         
         return label
     }()
@@ -70,9 +72,11 @@ class MainViewController: UIViewController {
             
             resultLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
             resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
+            resultLabel.widthAnchor.constraint(equalTo: buttonArea.widthAnchor),
             
             processLabel.trailingAnchor.constraint(equalTo: resultLabel.trailingAnchor),
-            processLabel.bottomAnchor.constraint(equalTo: resultLabel.topAnchor)
+            processLabel.bottomAnchor.constraint(equalTo: resultLabel.topAnchor),
+            processLabel.widthAnchor.constraint(equalTo: resultLabel.widthAnchor)
         ])
     }
     
