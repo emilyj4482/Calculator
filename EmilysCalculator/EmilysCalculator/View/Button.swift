@@ -12,7 +12,7 @@ class Button: UIButton {
     
     private var cancellables = Set<AnyCancellable>()
     
-    let vm = MainViewModel.shared
+    let mainVM = MainViewModel.shared
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
     
@@ -37,7 +37,7 @@ class Button: UIButton {
     private func setButtonSize() {
         // default button width = (screen.width - 16 * 2 - 8 * 3) / 4
         // zero button width = (screen.width - 16 * 2 - 8) / 2
-        vm.screen
+        mainVM.screen
             .combineLatest(isZero)
             .sink { [weak self] screen, isZero in
                 if isZero {
@@ -70,10 +70,10 @@ class Button: UIButton {
         setTitle(title, for: .normal)
         
         let buttonTapped = UIAction { [weak self] _ in
-            if self?.vm.testString == "0" {
-                self?.vm.testString = title
+            if self?.mainVM.numbersTypedIn == "0" {
+                self?.mainVM.numbersTypedIn = title
             } else {
-                self?.vm.testString += title
+                self?.mainVM.numbersTypedIn += title
             }
         }
             
