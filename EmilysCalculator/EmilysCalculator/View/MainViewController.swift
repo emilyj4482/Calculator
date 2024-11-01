@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    let vm = MainViewModel.shared
+    let mainVM = MainViewModel.shared
     
     private lazy var processLabel: UILabel = {
         let label = UILabel()
@@ -82,7 +82,7 @@ class MainViewController: UIViewController {
     
     private func setButtonAreaHeight() {
         // ButtonArea 높이 = 화면 전체 높이의 60%
-        vm.screen
+        mainVM.screen
             .sink { [weak self] screen in
                 self?.buttonArea.heightAnchor.constraint(equalToConstant: screen.height * 0.6).isActive = true
             }
@@ -95,7 +95,7 @@ class MainViewController: UIViewController {
     }
     
     private func sink() {
-        vm.$testString
+        mainVM.$numbersTypedIn
             .sink { [weak self] text in
                 self?.resultLabel.text = text
             }

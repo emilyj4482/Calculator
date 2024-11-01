@@ -11,6 +11,7 @@ import Combine
 final class MainViewModel {
     
     @Published var numbersTypedIn: String = "0"
+    @Published var calculationResult: String?
     
     static let shared = MainViewModel()
     
