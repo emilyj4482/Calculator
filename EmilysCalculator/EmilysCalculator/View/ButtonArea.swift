@@ -14,9 +14,8 @@ class ButtonArea: UIView {
     private lazy var ACButton: Button = {
         let button = Button()
         
-        button.setTitle("AC")
-        button.addAction("AC")
-        button.setColor(.status)
+        button.setButton("AC")
+        button.configureAs(.modifier)
         
         return button
     }()
@@ -24,9 +23,8 @@ class ButtonArea: UIView {
     private lazy var plusMinusButton: Button = {
         let button = Button()
         
-        button.setTitle("+/-")
-        button.addAction("+/-")
-        button.setColor(.status)
+        button.setButton("+/-")
+        button.configureAs(.modifier)
         
         return button
     }()
@@ -34,19 +32,17 @@ class ButtonArea: UIView {
     private lazy var percentButton: Button = {
         let button = Button()
         
-        button.setTitle("%")
-        button.addAction("%")
-        button.setColor(.status)
-        
+        button.setButton("%")
+        button.configureAs(.modifier)
+
         return button
     }()
     
     private lazy var divideButton: Button = {
         let button = Button()
         
-        button.setTitle("/")
-        button.addAction("/")
-        button.setColor(.operator)
+        button.setButton("/")
+        button.configureAs(.operation)
         
         return button
     }()
@@ -54,9 +50,8 @@ class ButtonArea: UIView {
     private lazy var multiplyButton: Button = {
         let button = Button()
         
-        button.setTitle("x")
-        button.addAction("x")
-        button.setColor(.operator)
+        button.setButton("x")
+        button.configureAs(.operation)
         
         return button
     }()
@@ -64,9 +59,8 @@ class ButtonArea: UIView {
     private lazy var substractButton: Button = {
         let button = Button()
         
-        button.setTitle("-")
-        button.addAction("-")
-        button.setColor(.operator)
+        button.setButton("-")
+        button.configureAs(.operation)
         
         return button
     }()
@@ -74,9 +68,8 @@ class ButtonArea: UIView {
     private lazy var addButton: Button = {
         let button = Button()
         
-        button.setTitle("+")
-        button.addAction("+")
-        button.setColor(.operator)
+        button.setButton("+")
+        button.configureAs(.operation)
         
         return button
     }()
@@ -84,9 +77,8 @@ class ButtonArea: UIView {
     private lazy var equalButton: Button = {
         let button = Button()
         
-        button.setTitle("=")
-        button.addAction("=")
-        button.setColor(.operator)
+        button.setButton("=")
+        button.configureAs(.operation)
         
         return button
     }()
@@ -94,10 +86,8 @@ class ButtonArea: UIView {
     private lazy var sevenButton: Button = {
         let button = Button()
         
-        // button.setTitle("7")
-        // button.addAction("7")
         button.setButton("7")
-        button.setColor(.number)
+        button.configureAs(.number)
         
         return button
     }()
@@ -105,9 +95,8 @@ class ButtonArea: UIView {
     private lazy var eightButton: Button = {
         let button = Button()
         
-        button.setTitle("8")
-        button.addAction("8")
-        button.setColor(.number)
+        button.setButton("8")
+        button.configureAs(.number)
         
         return button
     }()
@@ -115,9 +104,8 @@ class ButtonArea: UIView {
     private lazy var nineButton: Button = {
         let button = Button()
         
-        button.setTitle("9")
-        button.addAction("9")
-        button.setColor(.number)
+        button.setButton("9")
+        button.configureAs(.number)
         
         return button
     }()
@@ -125,9 +113,8 @@ class ButtonArea: UIView {
     private lazy var fourButton: Button = {
         let button = Button()
         
-        button.setTitle("4")
-        button.addAction("4")
-        button.setColor(.number)
+        button.setButton("4")
+        button.configureAs(.number)
         
         return button
     }()
@@ -135,9 +122,8 @@ class ButtonArea: UIView {
     private lazy var fiveButton: Button = {
         let button = Button()
         
-        button.setTitle("5")
-        button.addAction("5")
-        button.setColor(.number)
+        button.setButton("5")
+        button.configureAs(.number)
         
         return button
     }()
@@ -145,9 +131,8 @@ class ButtonArea: UIView {
     private lazy var sixButton: Button = {
         let button = Button()
         
-        button.setTitle("6")
-        button.addAction("6")
-        button.setColor(.number)
+        button.setButton("4")
+        button.configureAs(.number)
         
         return button
     }()
@@ -155,9 +140,8 @@ class ButtonArea: UIView {
     private lazy var oneButton: Button = {
         let button = Button()
         
-        button.setTitle("1")
-        button.addAction("1")
-        button.setColor(.number)
+        button.setButton("1")
+        button.configureAs(.number)
         
         return button
     }()
@@ -165,9 +149,8 @@ class ButtonArea: UIView {
     private lazy var twoButton: Button = {
         let button = Button()
         
-        button.setTitle("2")
-        button.addAction("2")
-        button.setColor(.number)
+        button.setButton("2")
+        button.configureAs(.number)
         
         return button
     }()
@@ -175,9 +158,8 @@ class ButtonArea: UIView {
     private lazy var threeButton: Button = {
         let button = Button()
         
-        button.setTitle("3")
-        button.addAction("3")
-        button.setColor(.number)
+        button.setButton("3")
+        button.configureAs(.number)
         
         return button
     }()
@@ -185,11 +167,9 @@ class ButtonArea: UIView {
     private lazy var zeroButton: Button = {
         let button = Button()
         
-        button.setTitle("0")
-        // button.addAction("0")
-        button.setColor(.number)
+        button.setButton("0")
+        button.configureAs(.number)
         button.isZero.send(true)
-        button.addAction2(service.testAction)
         
         return button
     }()
@@ -197,9 +177,8 @@ class ButtonArea: UIView {
     private lazy var dotButton: Button = {
         let button = Button()
         
-        button.setTitle(".")
-        button.addAction(".")
-        button.setColor(.number)
+        button.setButton(".")
+        button.configureAs(.number)
         
         return button
     }()

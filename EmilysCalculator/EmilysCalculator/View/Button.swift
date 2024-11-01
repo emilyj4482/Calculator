@@ -8,13 +8,20 @@
 import UIKit
 import Combine
 
+
+enum ConfigureButtonAs {
+    case number, operation, modifier
+}
+
 class Button: UIButton {
     
     private var cancellables = Set<AnyCancellable>()
     
-    let vm = MainViewModel.shared
+    let mainVM = MainViewModel.shared
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
+    
+    var configureButtonAs: ConfigureButtonAs?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -37,7 +44,7 @@ class Button: UIButton {
     private func setButtonSize() {
         // default button width = (screen.width - 16 * 2 - 8 * 3) / 4
         // zero button width = (screen.width - 16 * 2 - 8) / 2
-        vm.screen
+        mainVM.screen
             .combineLatest(isZero)
             .sink { [weak self] screen, isZero in
                 if isZero {
@@ -51,33 +58,31 @@ class Button: UIButton {
             .store(in: &cancellables)
     }
     
-    func setTitle(_ title: String) {
-        setTitle(title, for: .normal)
-    }
-    
-    func addAction(_ title: String) {
-        let buttonTapped = UIAction { _ in
-            print("\(title) button tapped")
-        }
-        addAction(buttonTapped, for: .touchUpInside)
-    }
-    
-    func addAction2(_ action : UIAction) {
-        addAction(action, for: .touchUpInside)
-    }
-    
-    func setButton(_ title: String) {
-        setTitle(title, for: .normal)
+    func setButton(_ input: String) {
+        setTitle(input, for: .normal)
         
         let buttonTapped = UIAction { [weak self] _ in
-            if self?.vm.testString == "0" {
-                self?.vm.testString = title
+            print("\(input) button tapped")
+            if self?.mainVM.numbersTypedIn == "0" {
+                self?.mainVM.numbersTypedIn = input
             } else {
-                self?.vm.testString += title
+                self?.mainVM.numbersTypedIn += input
             }
         }
-            
         addAction(buttonTapped, for: .touchUpInside)
+    }
+    
+    func configureAs(_ type: ConfigureButtonAs) {
+        self.configureButtonAs = type
+        
+        switch type {
+        case .number:
+            self.setColor(.number)
+        case .operation:
+            self.setColor(.operator)
+        case .modifier:
+            self.setColor(.status)
+        }
     }
     
     func setColor(_ color: UIColor) {
