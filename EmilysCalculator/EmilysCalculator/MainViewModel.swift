@@ -18,9 +18,8 @@ final class MainViewModel {
     private var cancellables = Set<AnyCancellable>()
     
     // preview 용 default size : iphone 16 pro max
-    let screen = CurrentValueSubject<(width: CGFloat, height: CGFloat), Never>((width: 440, height: 956))
+    // let screen = CurrentValueSubject<(width: CGFloat, height: CGFloat), Never>((width: 440, height: 956))
     
-    // let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
+    let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
     
-
 }

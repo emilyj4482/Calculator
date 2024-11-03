@@ -8,11 +8,6 @@
 import UIKit
 import Combine
 
-
-enum ConfigureButtonAs {
-    case number, operation, modifier
-}
-
 class Button: UIButton {
     
     private var cancellables = Set<AnyCancellable>()
@@ -20,8 +15,6 @@ class Button: UIButton {
     let mainVM = MainViewModel.shared
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
-    
-    var configureButtonAs: ConfigureButtonAs?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -58,34 +51,34 @@ class Button: UIButton {
             .store(in: &cancellables)
     }
     
-    func setButton(_ input: String) {
-        setTitle(input, for: .normal)
-        
+    private func setAction(_ buttonInfo: ButtonInfo) {
         let buttonTapped = UIAction { [weak self] _ in
-            print("\(input) button tapped")
+            print("\(buttonInfo.name.title) button tapped")
+            
             if self?.mainVM.numbersTypedIn == "0" {
-                self?.mainVM.numbersTypedIn = input
+                self?.mainVM.numbersTypedIn = buttonInfo.name.title
             } else {
-                self?.mainVM.numbersTypedIn += input
+                self?.mainVM.numbersTypedIn += buttonInfo.name.title
             }
+            
         }
         addAction(buttonTapped, for: .touchUpInside)
     }
     
-    func configureAs(_ type: ConfigureButtonAs) {
-        self.configureButtonAs = type
-        
-        switch type {
+    private func setColor(_ group: ButtonGroup) {
+        switch group {
         case .number:
-            self.setColor(.number)
+            backgroundColor = .number
         case .operation:
-            self.setColor(.operator)
+            backgroundColor = .operator
         case .modifier:
-            self.setColor(.modifier)
+            backgroundColor = .modifier
         }
     }
     
-    func setColor(_ color: UIColor) {
-        backgroundColor = color
+    func setButton(_ buttonInfo: ButtonInfo) {
+        setTitle(buttonInfo.name.title, for: .normal)
+        setColor(buttonInfo.group)
+        setAction(buttonInfo)
     }
 }
