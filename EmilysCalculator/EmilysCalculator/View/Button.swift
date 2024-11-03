@@ -81,7 +81,7 @@ class Button: UIButton {
         case .operation:
             self.setColor(.operator)
         case .modifier:
-            self.setColor(.status)
+            self.setColor(.modifier)
         }
     }
     
