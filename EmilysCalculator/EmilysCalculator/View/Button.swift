@@ -51,20 +51,6 @@ class Button: UIButton {
             .store(in: &cancellables)
     }
     
-    private func setAction(_ buttonInfo: ButtonInfo) {
-        let buttonTapped = UIAction { [weak self] _ in
-            print("\(buttonInfo.name.title) button tapped")
-            
-            if self?.mainVM.numbersTypedIn == "0" {
-                self?.mainVM.numbersTypedIn = buttonInfo.name.title
-            } else {
-                self?.mainVM.numbersTypedIn += buttonInfo.name.title
-            }
-            
-        }
-        addAction(buttonTapped, for: .touchUpInside)
-    }
-    
     private func setColor(_ group: ButtonGroup) {
         switch group {
         case .number:
@@ -79,6 +65,6 @@ class Button: UIButton {
     func setButton(_ buttonInfo: ButtonInfo) {
         setTitle(buttonInfo.name.title, for: .normal)
         setColor(buttonInfo.group)
-        setAction(buttonInfo)
+        addAction(mainVM.buttonTapped(buttonInfo), for: .touchUpInside)
     }
 }
