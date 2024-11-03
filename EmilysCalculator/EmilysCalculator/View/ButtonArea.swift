@@ -9,9 +9,7 @@ import UIKit
 
 class ButtonArea: UIView {
     
-    let service = ButtonTapService()
-    
-    private lazy var ACButton: Button = {
+    private lazy var clearButton: Button = {
         let button = Button()
         
         button.setButton("AC")
@@ -56,7 +54,7 @@ class ButtonArea: UIView {
         return button
     }()
     
-    private lazy var substractButton: Button = {
+    private lazy var subtractButton: Button = {
         let button = Button()
         
         button.setButton("-")
@@ -174,7 +172,7 @@ class ButtonArea: UIView {
         return button
     }()
     
-    private lazy var dotButton: Button = {
+    private lazy var decimalButton: Button = {
         let button = Button()
         
         button.setButton(".")
@@ -195,7 +193,7 @@ class ButtonArea: UIView {
     }
     
     private func addSubview() {
-        [ACButton, plusMinusButton, percentButton, divideButton, multiplyButton, substractButton, addButton, equalButton, sevenButton, eightButton, nineButton, fourButton, fiveButton, sixButton, oneButton, twoButton, threeButton, zeroButton, dotButton]
+        [clearButton, plusMinusButton, percentButton, divideButton, multiplyButton, subtractButton, addButton, equalButton, sevenButton, eightButton, nineButton, fourButton, fiveButton, sixButton, oneButton, twoButton, threeButton, zeroButton, decimalButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -212,32 +210,32 @@ class ButtonArea: UIView {
         let inset: CGFloat = 8.0
         
         NSLayoutConstraint.activate([
-            ACButton.topAnchor.constraint(equalTo: topAnchor),
-            ACButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            clearButton.topAnchor.constraint(equalTo: topAnchor),
+            clearButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            plusMinusButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
-            plusMinusButton.leadingAnchor.constraint(equalTo: ACButton.trailingAnchor, constant: inset),
+            plusMinusButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
+            plusMinusButton.leadingAnchor.constraint(equalTo: clearButton.trailingAnchor, constant: inset),
             
-            percentButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            percentButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
             percentButton.leadingAnchor.constraint(equalTo: plusMinusButton.trailingAnchor, constant: inset),
             
-            divideButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            divideButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
             divideButton.leadingAnchor.constraint(equalTo: percentButton.trailingAnchor, constant: inset),
             
             multiplyButton.topAnchor.constraint(equalTo: divideButton.bottomAnchor, constant: inset),
             multiplyButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            substractButton.topAnchor.constraint(equalTo: multiplyButton.bottomAnchor, constant: inset),
-            substractButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            subtractButton.topAnchor.constraint(equalTo: multiplyButton.bottomAnchor, constant: inset),
+            subtractButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            addButton.topAnchor.constraint(equalTo: substractButton.bottomAnchor, constant: inset),
+            addButton.topAnchor.constraint(equalTo: subtractButton.bottomAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
             equalButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: inset),
             equalButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            sevenButton.topAnchor.constraint(equalTo: ACButton.bottomAnchor, constant: inset),
-            sevenButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            sevenButton.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: inset),
+            sevenButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             eightButton.topAnchor.constraint(equalTo: sevenButton.topAnchor),
             eightButton.leadingAnchor.constraint(equalTo: sevenButton.trailingAnchor, constant: inset),
@@ -246,7 +244,7 @@ class ButtonArea: UIView {
             nineButton.leadingAnchor.constraint(equalTo: eightButton.trailingAnchor, constant: inset),
             
             fourButton.topAnchor.constraint(equalTo: sevenButton.bottomAnchor, constant: inset),
-            fourButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            fourButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             fiveButton.topAnchor.constraint(equalTo: fourButton.topAnchor),
             fiveButton.leadingAnchor.constraint(equalTo: fourButton.trailingAnchor, constant: inset),
@@ -255,7 +253,7 @@ class ButtonArea: UIView {
             sixButton.leadingAnchor.constraint(equalTo: fiveButton.trailingAnchor, constant: inset),
             
             oneButton.topAnchor.constraint(equalTo: fourButton.bottomAnchor, constant: inset),
-            oneButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            oneButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             twoButton.topAnchor.constraint(equalTo: oneButton.topAnchor),
             twoButton.leadingAnchor.constraint(equalTo: oneButton.trailingAnchor, constant: inset),
@@ -264,10 +262,10 @@ class ButtonArea: UIView {
             threeButton.leadingAnchor.constraint(equalTo: twoButton.trailingAnchor, constant: inset),
             
             zeroButton.topAnchor.constraint(equalTo: oneButton.bottomAnchor, constant: inset),
-            zeroButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            zeroButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
-            dotButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
-            dotButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
+            decimalButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
+            decimalButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
             
             // 0 button text 위치
             zeroButtonLabel.leadingAnchor.constraint(equalTo: oneButtonLabel.leadingAnchor)
