@@ -51,6 +51,26 @@ class Button: UIButton {
             .store(in: &cancellables)
     }
     
+  // 임시로 살려놓은 코드이며, 추후 mainViewModel로 통합할것.
+    func buttonAction(_ input: String) {
+        setTitle(input, for: .normal)
+        
+        let buttonTapped = UIAction { [weak self] _ in
+            print("\(input) button tapped")
+            
+            if input == "=" {
+                let expression = NSExpression(format: self?.mainVM.numbersTypedIn.replacingOccurrences(of: "x", with: "*") ?? "Error")
+                let result = expression.expressionValue(with: nil, context: nil) as? Int
+                
+                self?.mainVM.numbersTypedIn = result?.description ?? "Error"
+            } else {
+                self?.mainVM.numbersTypedIn.append(input)
+            }
+            
+        }
+        addAction(buttonTapped, for: .touchUpInside)
+    }
+    
     private func setColor(_ group: ButtonGroup) {
         switch group {
         case .number:

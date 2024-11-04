@@ -11,116 +11,154 @@ class ButtonArea: UIView {
     
     private lazy var clearButton: Button = {
         let button = Button()
+      
         button.setButton(.init(group: .modifier, name: .allClear))
+      
         return button
     }()
     
     private lazy var plusMinusButton: Button = {
         let button = Button()
+        
         button.setButton(.init(group: .modifier, name: .plusMinus))
+      
         return button
     }()
     
     private lazy var percentButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .modifier, name: .percent))
+
         return button
     }()
     
     private lazy var divideButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .operation, name: .divide))
+
         return button
     }()
     
     private lazy var multiplyButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .operation, name: .multiply))
+
         return button
     }()
     
     private lazy var subtractButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .operation, name: .subtract))
+
         return button
     }()
     
     private lazy var addButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .operation, name: .add))
+
         return button
     }()
     
     private lazy var equalButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .operation, name: .equal))
+
         return button
     }()
     
     private lazy var sevenButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .seven))
+
         return button
     }()
     
     private lazy var eightButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .eight))
+
         return button
     }()
     
     private lazy var nineButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .nine))
+
         return button
     }()
     
     private lazy var fourButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .four))
+
         return button
     }()
     
     private lazy var fiveButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .five))
+
         return button
     }()
     
     private lazy var sixButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .six))
+
         return button
     }()
     
     private lazy var oneButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .one))
+
         return button
     }()
     
     private lazy var twoButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .two))
+
         return button
     }()
     
     private lazy var threeButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .three))
+
         return button
     }()
     
     private lazy var zeroButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .zero))
         button.isZero.send(true)
+      
         return button
     }()
     
     private lazy var decimalButton: Button = {
         let button = Button()
+
         button.setButton(.init(group: .number, name: .decimal))
+
         return button
     }()
     
