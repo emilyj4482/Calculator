@@ -63,11 +63,16 @@ class Button: UIButton {
         
         let buttonTapped = UIAction { [weak self] _ in
             print("\(input) button tapped")
-            if self?.mainVM.numbersTypedIn == "0" {
-                self?.mainVM.numbersTypedIn = input
+            
+            if input == "=" {
+                let expression = NSExpression(format: self?.mainVM.numbersTypedIn.replacingOccurrences(of: "x", with: "*") ?? "Error")
+                let result = expression.expressionValue(with: nil, context: nil) as? Int
+                
+                self?.mainVM.numbersTypedIn = result?.description ?? "Error"
             } else {
-                self?.mainVM.numbersTypedIn += input
+                self?.mainVM.numbersTypedIn.append(input)
             }
+            
         }
         addAction(buttonTapped, for: .touchUpInside)
     }

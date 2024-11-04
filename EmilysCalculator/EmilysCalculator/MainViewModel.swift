@@ -10,7 +10,8 @@ import Combine
 
 final class MainViewModel {
     
-    @Published var numbersTypedIn: String?
+    // 변수명 바꿔야 할 것 같은데...
+    @Published var numbersTypedIn: String = ""
     @Published var calculationResult: String?
     
     static let shared = MainViewModel()
