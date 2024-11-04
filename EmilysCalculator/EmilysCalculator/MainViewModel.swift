@@ -10,7 +10,7 @@ import Combine
 
 final class MainViewModel {
     
-    @Published var numbersTypedIn: String = "0"
+    @Published var numbersTypedIn: String?
     @Published var calculationResult: String?
     
     static let shared = MainViewModel()

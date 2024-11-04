@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 
-enum ConfigureButtonAs {
+enum ButtonRole {
     case number, operation, modifier
 }
 
@@ -21,7 +21,7 @@ class Button: UIButton {
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
     
-    var configureButtonAs: ConfigureButtonAs?
+    var buttonRole: ButtonRole?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -72,10 +72,10 @@ class Button: UIButton {
         addAction(buttonTapped, for: .touchUpInside)
     }
     
-    func configureAs(_ type: ConfigureButtonAs) {
-        self.configureButtonAs = type
+    func configure(as role: ButtonRole) {
+        self.buttonRole = role
         
-        switch type {
+        switch role {
         case .number:
             self.setColor(.number)
         case .operation:

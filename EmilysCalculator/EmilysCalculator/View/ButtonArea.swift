@@ -15,7 +15,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("AC")
-        button.configureAs(.modifier)
+        button.configure(as: .modifier)
         
         return button
     }()
@@ -24,7 +24,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("+/-")
-        button.configureAs(.modifier)
+        button.configure(as: .modifier)
         
         return button
     }()
@@ -33,7 +33,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("%")
-        button.configureAs(.modifier)
+        button.configure(as: .modifier)
 
         return button
     }()
@@ -42,7 +42,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("/")
-        button.configureAs(.operation)
+        button.configure(as: .operation)
         
         return button
     }()
@@ -51,7 +51,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("x")
-        button.configureAs(.operation)
+        button.configure(as: .operation)
         
         return button
     }()
@@ -60,7 +60,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("-")
-        button.configureAs(.operation)
+        button.configure(as: .operation)
         
         return button
     }()
@@ -69,7 +69,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("+")
-        button.configureAs(.operation)
+        button.configure(as: .operation)
         
         return button
     }()
@@ -78,7 +78,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("=")
-        button.configureAs(.operation)
+        button.configure(as: .operation)
         
         return button
     }()
@@ -87,7 +87,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("7")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -96,7 +96,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("8")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -105,7 +105,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("9")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -114,7 +114,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("4")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -123,7 +123,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("5")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -132,7 +132,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("4")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -141,7 +141,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("1")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -150,7 +150,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("2")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -159,7 +159,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("3")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
@@ -168,7 +168,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton("0")
-        button.configureAs(.number)
+        button.configure(as: .number)
         button.isZero.send(true)
         
         return button
@@ -178,7 +178,7 @@ class ButtonArea: UIView {
         let button = Button()
         
         button.setButton(".")
-        button.configureAs(.number)
+        button.configure(as: .number)
         
         return button
     }()
