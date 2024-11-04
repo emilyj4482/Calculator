@@ -8,11 +8,11 @@
 import Foundation
 
 struct ButtonInfo {
-    let group: ButtonGroup
+    let group: ButtonRole
     let name: ButtonName
 }
 
-enum ButtonGroup {
+enum ButtonRole {
     case number, operation, modifier
 }
 

@@ -71,8 +71,8 @@ class Button: UIButton {
         addAction(buttonTapped, for: .touchUpInside)
     }
     
-    private func setColor(_ group: ButtonGroup) {
-        switch group {
+    private func setColor(_ role: ButtonRole) {
+        switch role {
         case .number:
             backgroundColor = .number
         case .operation:
