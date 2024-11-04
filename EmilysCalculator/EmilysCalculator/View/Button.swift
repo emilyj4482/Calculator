@@ -8,11 +8,6 @@
 import UIKit
 import Combine
 
-
-enum ButtonRole {
-    case number, operation, modifier
-}
-
 class Button: UIButton {
     
     private var cancellables = Set<AnyCancellable>()
@@ -20,8 +15,6 @@ class Button: UIButton {
     let mainVM = MainViewModel.shared
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
-    
-    var buttonRole: ButtonRole?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -58,7 +51,8 @@ class Button: UIButton {
             .store(in: &cancellables)
     }
     
-    func setButton(_ input: String) {
+  // 임시로 살려놓은 코드이며, 추후 mainViewModel로 통합할것.
+    func buttonAction(_ input: String) {
         setTitle(input, for: .normal)
         
         let buttonTapped = UIAction { [weak self] _ in
@@ -77,20 +71,20 @@ class Button: UIButton {
         addAction(buttonTapped, for: .touchUpInside)
     }
     
-    func configure(as role: ButtonRole) {
-        self.buttonRole = role
-        
-        switch role {
+    private func setColor(_ group: ButtonGroup) {
+        switch group {
         case .number:
-            self.setColor(.number)
+            backgroundColor = .number
         case .operation:
-            self.setColor(.operator)
+            backgroundColor = .operator
         case .modifier:
-            self.setColor(.status)
+            backgroundColor = .modifier
         }
     }
     
-    func setColor(_ color: UIColor) {
-        backgroundColor = color
+    func setButton(_ buttonInfo: ButtonInfo) {
+        setTitle(buttonInfo.name.title, for: .normal)
+        setColor(buttonInfo.group)
+        addAction(mainVM.buttonTapped(buttonInfo), for: .touchUpInside)
     }
 }

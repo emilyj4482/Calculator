@@ -9,177 +9,156 @@ import UIKit
 
 class ButtonArea: UIView {
     
-    let service = ButtonTapService()
-    
-    private lazy var ACButton: Button = {
+    private lazy var clearButton: Button = {
         let button = Button()
-        
-        button.setButton("AC")
-        button.configure(as: .modifier)
-        
+      
+        button.setButton(.init(group: .modifier, name: .allClear))
+      
         return button
     }()
     
     private lazy var plusMinusButton: Button = {
         let button = Button()
         
-        button.setButton("+/-")
-        button.configure(as: .modifier)
-        
+        button.setButton(.init(group: .modifier, name: .plusMinus))
+      
         return button
     }()
     
     private lazy var percentButton: Button = {
         let button = Button()
-        
-        button.setButton("%")
-        button.configure(as: .modifier)
+
+        button.setButton(.init(group: .modifier, name: .percent))
 
         return button
     }()
     
     private lazy var divideButton: Button = {
         let button = Button()
-        
-        button.setButton("/")
-        button.configure(as: .operation)
-        
+
+        button.setButton(.init(group: .operation, name: .divide))
+
         return button
     }()
     
     private lazy var multiplyButton: Button = {
         let button = Button()
-        
-        button.setButton("x")
-        button.configure(as: .operation)
-        
+
+        button.setButton(.init(group: .operation, name: .multiply))
+
         return button
     }()
     
-    private lazy var substractButton: Button = {
+    private lazy var subtractButton: Button = {
         let button = Button()
-        
-        button.setButton("-")
-        button.configure(as: .operation)
-        
+
+        button.setButton(.init(group: .operation, name: .subtract))
+
         return button
     }()
     
     private lazy var addButton: Button = {
         let button = Button()
-        
-        button.setButton("+")
-        button.configure(as: .operation)
-        
+
+        button.setButton(.init(group: .operation, name: .add))
+
         return button
     }()
     
     private lazy var equalButton: Button = {
         let button = Button()
-        
-        button.setButton("=")
-        button.configure(as: .operation)
-        
+
+        button.setButton(.init(group: .operation, name: .equal))
+
         return button
     }()
     
     private lazy var sevenButton: Button = {
         let button = Button()
-        
-        button.setButton("7")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .seven))
+
         return button
     }()
     
     private lazy var eightButton: Button = {
         let button = Button()
-        
-        button.setButton("8")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .eight))
+
         return button
     }()
     
     private lazy var nineButton: Button = {
         let button = Button()
-        
-        button.setButton("9")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .nine))
+
         return button
     }()
     
     private lazy var fourButton: Button = {
         let button = Button()
-        
-        button.setButton("4")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .four))
+
         return button
     }()
     
     private lazy var fiveButton: Button = {
         let button = Button()
-        
-        button.setButton("5")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .five))
+
         return button
     }()
     
     private lazy var sixButton: Button = {
         let button = Button()
-        
-        button.setButton("4")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .six))
+
         return button
     }()
     
     private lazy var oneButton: Button = {
         let button = Button()
-        
-        button.setButton("1")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .one))
+
         return button
     }()
     
     private lazy var twoButton: Button = {
         let button = Button()
-        
-        button.setButton("2")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .two))
+
         return button
     }()
     
     private lazy var threeButton: Button = {
         let button = Button()
-        
-        button.setButton("3")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .three))
+
         return button
     }()
     
     private lazy var zeroButton: Button = {
         let button = Button()
-        
-        button.setButton("0")
-        button.configure(as: .number)
+
+        button.setButton(.init(group: .number, name: .zero))
         button.isZero.send(true)
-        
+      
         return button
     }()
     
-    private lazy var dotButton: Button = {
+    private lazy var decimalButton: Button = {
         let button = Button()
-        
-        button.setButton(".")
-        button.configure(as: .number)
-        
+
+        button.setButton(.init(group: .number, name: .decimal))
+
         return button
     }()
     
@@ -195,7 +174,7 @@ class ButtonArea: UIView {
     }
     
     private func addSubview() {
-        [ACButton, plusMinusButton, percentButton, divideButton, multiplyButton, substractButton, addButton, equalButton, sevenButton, eightButton, nineButton, fourButton, fiveButton, sixButton, oneButton, twoButton, threeButton, zeroButton, dotButton]
+        [clearButton, plusMinusButton, percentButton, divideButton, multiplyButton, subtractButton, addButton, equalButton, sevenButton, eightButton, nineButton, fourButton, fiveButton, sixButton, oneButton, twoButton, threeButton, zeroButton, decimalButton]
             .forEach {
                 addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -212,32 +191,32 @@ class ButtonArea: UIView {
         let inset: CGFloat = 8.0
         
         NSLayoutConstraint.activate([
-            ACButton.topAnchor.constraint(equalTo: topAnchor),
-            ACButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+            clearButton.topAnchor.constraint(equalTo: topAnchor),
+            clearButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            plusMinusButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
-            plusMinusButton.leadingAnchor.constraint(equalTo: ACButton.trailingAnchor, constant: inset),
+            plusMinusButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
+            plusMinusButton.leadingAnchor.constraint(equalTo: clearButton.trailingAnchor, constant: inset),
             
-            percentButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            percentButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
             percentButton.leadingAnchor.constraint(equalTo: plusMinusButton.trailingAnchor, constant: inset),
             
-            divideButton.topAnchor.constraint(equalTo: ACButton.topAnchor),
+            divideButton.topAnchor.constraint(equalTo: clearButton.topAnchor),
             divideButton.leadingAnchor.constraint(equalTo: percentButton.trailingAnchor, constant: inset),
             
             multiplyButton.topAnchor.constraint(equalTo: divideButton.bottomAnchor, constant: inset),
             multiplyButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            substractButton.topAnchor.constraint(equalTo: multiplyButton.bottomAnchor, constant: inset),
-            substractButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
+            subtractButton.topAnchor.constraint(equalTo: multiplyButton.bottomAnchor, constant: inset),
+            subtractButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            addButton.topAnchor.constraint(equalTo: substractButton.bottomAnchor, constant: inset),
+            addButton.topAnchor.constraint(equalTo: subtractButton.bottomAnchor, constant: inset),
             addButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
             equalButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: inset),
             equalButton.trailingAnchor.constraint(equalTo: divideButton.trailingAnchor),
             
-            sevenButton.topAnchor.constraint(equalTo: ACButton.bottomAnchor, constant: inset),
-            sevenButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            sevenButton.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: inset),
+            sevenButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             eightButton.topAnchor.constraint(equalTo: sevenButton.topAnchor),
             eightButton.leadingAnchor.constraint(equalTo: sevenButton.trailingAnchor, constant: inset),
@@ -246,7 +225,7 @@ class ButtonArea: UIView {
             nineButton.leadingAnchor.constraint(equalTo: eightButton.trailingAnchor, constant: inset),
             
             fourButton.topAnchor.constraint(equalTo: sevenButton.bottomAnchor, constant: inset),
-            fourButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            fourButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             fiveButton.topAnchor.constraint(equalTo: fourButton.topAnchor),
             fiveButton.leadingAnchor.constraint(equalTo: fourButton.trailingAnchor, constant: inset),
@@ -255,7 +234,7 @@ class ButtonArea: UIView {
             sixButton.leadingAnchor.constraint(equalTo: fiveButton.trailingAnchor, constant: inset),
             
             oneButton.topAnchor.constraint(equalTo: fourButton.bottomAnchor, constant: inset),
-            oneButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            oneButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
             twoButton.topAnchor.constraint(equalTo: oneButton.topAnchor),
             twoButton.leadingAnchor.constraint(equalTo: oneButton.trailingAnchor, constant: inset),
@@ -264,10 +243,10 @@ class ButtonArea: UIView {
             threeButton.leadingAnchor.constraint(equalTo: twoButton.trailingAnchor, constant: inset),
             
             zeroButton.topAnchor.constraint(equalTo: oneButton.bottomAnchor, constant: inset),
-            zeroButton.leadingAnchor.constraint(equalTo: ACButton.leadingAnchor),
+            zeroButton.leadingAnchor.constraint(equalTo: clearButton.leadingAnchor),
             
-            dotButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
-            dotButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
+            decimalButton.topAnchor.constraint(equalTo: zeroButton.topAnchor),
+            decimalButton.trailingAnchor.constraint(equalTo: equalButton.leadingAnchor, constant: -inset),
             
             // 0 button text 위치
             zeroButtonLabel.leadingAnchor.constraint(equalTo: oneButtonLabel.leadingAnchor)

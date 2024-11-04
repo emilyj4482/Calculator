@@ -9,7 +9,15 @@ import UIKit
 import Combine
 
 class ButtonTapService {
-    let testAction: UIAction = UIAction { _ in
-        print("test")
+    
+    var testHandler: (ButtonInfo) -> Void = {
+        print($0.name.title)
     }
+    
+    func testAction(_ buttonInfo: ButtonInfo) -> UIAction {
+        return UIAction(handler: { [weak self] _ in
+            self?.testHandler(buttonInfo)
+        })
+    }
+    
 }
