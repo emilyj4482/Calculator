@@ -33,11 +33,22 @@ final class MainViewModel {
                 if self?.numbersTypedIn == "0" {
                     self?.numbersTypedIn = buttonInfo.name.title
                 } else {
-                    self?.numbersTypedIn += buttonInfo.name.title
+                    self?.numbersTypedIn.append(buttonInfo.name.title)
                 }
             }
         case .operation:
-            service.testAction(buttonInfo)
+            UIAction { [weak self] _ in
+                if buttonInfo.name == .equal {
+                    let expression = NSExpression(format: (self?.numbersTypedIn.replacingOccurrences(of: "x", with: "*"))!)
+                    let result = expression.expressionValue(with: nil, context: nil) as? Int
+                    
+                    self?.numbersTypedIn = result?.description ?? "Error"
+                } else {
+                    self?.numbersTypedIn.append(buttonInfo.name.title)
+                }
+            }
+//            service.testAction(buttonInfo)
+            
         case .modifier:
             modifierButtonTapped(buttonInfo.name)
         }
