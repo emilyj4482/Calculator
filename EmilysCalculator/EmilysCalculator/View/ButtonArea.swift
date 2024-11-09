@@ -231,6 +231,18 @@ class ButtonArea: UIView {
     }
 }
 
+extension ButtonArea {
+    // number text 구독하여 count에 따라 clearButton 종류 전환
+    private func toggleClearButton() {
+        mainVM.$showAC
+            .sink { [weak self] hideAC in
+                self?.allClearButton.isHidden = !hideAC
+                self?.clearEntryButton.isHidden = hideAC
+            }
+            .store(in: &cancellables)
+    }
+}
+
 #Preview {
     MainViewController()
 }

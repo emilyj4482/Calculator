@@ -20,4 +20,8 @@ class ButtonTapService {
         })
     }
     
+    func clearEntry(_ text: inout String) {
+        text.removeLast()
+    }
+    
 }
