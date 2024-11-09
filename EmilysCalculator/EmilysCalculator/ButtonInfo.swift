@@ -8,7 +8,7 @@
 import Foundation
 
 struct ButtonInfo {
-    let group: ButtonRole
+    let role: ButtonRole
     let name: ButtonName
 }
 

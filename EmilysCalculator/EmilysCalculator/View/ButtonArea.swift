@@ -12,7 +12,7 @@ class ButtonArea: UIView {
     private lazy var clearButton: Button = {
         let button = Button()
       
-        button.setButton(.init(group: .modifier, name: .allClear))
+        button.setButton(.init(role: .modifier, name: .allClear))
       
         return button
     }()
@@ -20,7 +20,7 @@ class ButtonArea: UIView {
     private lazy var plusMinusButton: Button = {
         let button = Button()
         
-        button.setButton(.init(group: .modifier, name: .plusMinus))
+        button.setButton(.init(role: .modifier, name: .plusMinus))
       
         return button
     }()
@@ -28,7 +28,7 @@ class ButtonArea: UIView {
     private lazy var percentButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .modifier, name: .percent))
+        button.setButton(.init(role: .modifier, name: .percent))
 
         return button
     }()
@@ -36,7 +36,7 @@ class ButtonArea: UIView {
     private lazy var divideButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .operation, name: .divide))
+        button.setButton(.init(role: .operation, name: .divide))
 
         return button
     }()
@@ -44,7 +44,7 @@ class ButtonArea: UIView {
     private lazy var multiplyButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .operation, name: .multiply))
+        button.setButton(.init(role: .operation, name: .multiply))
 
         return button
     }()
@@ -52,7 +52,7 @@ class ButtonArea: UIView {
     private lazy var subtractButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .operation, name: .subtract))
+        button.setButton(.init(role: .operation, name: .subtract))
 
         return button
     }()
@@ -60,7 +60,7 @@ class ButtonArea: UIView {
     private lazy var addButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .operation, name: .add))
+        button.setButton(.init(role: .operation, name: .add))
 
         return button
     }()
@@ -68,7 +68,7 @@ class ButtonArea: UIView {
     private lazy var equalButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .operation, name: .equal))
+        button.setButton(.init(role: .operation, name: .equal))
 
         return button
     }()
@@ -76,7 +76,7 @@ class ButtonArea: UIView {
     private lazy var sevenButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .seven))
+        button.setButton(.init(role: .number, name: .seven))
 
         return button
     }()
@@ -84,7 +84,7 @@ class ButtonArea: UIView {
     private lazy var eightButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .eight))
+        button.setButton(.init(role: .number, name: .eight))
 
         return button
     }()
@@ -92,7 +92,7 @@ class ButtonArea: UIView {
     private lazy var nineButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .nine))
+        button.setButton(.init(role: .number, name: .nine))
 
         return button
     }()
@@ -100,7 +100,7 @@ class ButtonArea: UIView {
     private lazy var fourButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .four))
+        button.setButton(.init(role: .number, name: .four))
 
         return button
     }()
@@ -108,7 +108,7 @@ class ButtonArea: UIView {
     private lazy var fiveButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .five))
+        button.setButton(.init(role: .number, name: .five))
 
         return button
     }()
@@ -116,7 +116,7 @@ class ButtonArea: UIView {
     private lazy var sixButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .six))
+        button.setButton(.init(role: .number, name: .six))
 
         return button
     }()
@@ -124,7 +124,7 @@ class ButtonArea: UIView {
     private lazy var oneButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .one))
+        button.setButton(.init(role: .number, name: .one))
 
         return button
     }()
@@ -132,7 +132,7 @@ class ButtonArea: UIView {
     private lazy var twoButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .two))
+        button.setButton(.init(role: .number, name: .two))
 
         return button
     }()
@@ -140,7 +140,7 @@ class ButtonArea: UIView {
     private lazy var threeButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .three))
+        button.setButton(.init(role: .number, name: .three))
 
         return button
     }()
@@ -148,7 +148,7 @@ class ButtonArea: UIView {
     private lazy var zeroButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .zero))
+        button.setButton(.init(role: .number, name: .zero))
         button.isZero.send(true)
       
         return button
@@ -157,7 +157,7 @@ class ButtonArea: UIView {
     private lazy var decimalButton: Button = {
         let button = Button()
 
-        button.setButton(.init(group: .number, name: .decimal))
+        button.setButton(.init(role: .number, name: .decimal))
 
         return button
     }()

@@ -64,7 +64,7 @@ class Button: UIButton {
     
     func setButton(_ buttonInfo: ButtonInfo) {
         setTitle(buttonInfo.name.title, for: .normal)
-        setColor(buttonInfo.group)
+        setColor(buttonInfo.role)
         addAction(mainVM.buttonTapped(buttonInfo), for: .touchUpInside)
     }
 }

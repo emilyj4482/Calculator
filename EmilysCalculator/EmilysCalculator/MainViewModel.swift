@@ -26,7 +26,7 @@ final class MainViewModel {
     // let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
     
     func buttonTapped(_ buttonInfo: ButtonInfo) -> UIAction {
-        switch buttonInfo.group {
+        switch buttonInfo.role {
         case .number:
             UIAction { [weak self] _ in
                 print("\(buttonInfo.name.title) button tapped")
