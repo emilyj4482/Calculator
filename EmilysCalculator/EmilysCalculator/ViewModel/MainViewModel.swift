@@ -21,8 +21,8 @@ final class MainViewModel {
     private let service = ButtonTapService()
     
     // preview 용 default size : iphone 16 pro max
-    let screen = CurrentValueSubject<(width: CGFloat, height: CGFloat), Never>((width: 440, height: 956))
-    // let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
+    // let screen = CurrentValueSubject<(width: CGFloat, height: CGFloat), Never>((width: 440, height: 956))
+    let screen = PassthroughSubject<(width: CGFloat, height: CGFloat), Never>()
     
     // AC / CE toggle
     @Published var showAC: Bool = true

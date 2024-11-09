@@ -12,14 +12,14 @@ class Button: UIButton {
     
     private var cancellables = Set<AnyCancellable>()
     
-    let mainVM = MainViewModel.shared
+    private let mainVM = MainViewModel.shared
     
     let isZero: CurrentValueSubject<Bool, Never> = .init(false)
+    let withImage: CurrentValueSubject<Bool, Never> = .init(false)  // UIImage(systemName: )을 통해 버튼 설정하는지 여부
+    private let imageSize = PassthroughSubject<CGFloat, Never>()    // auto layout을 위해 size 전송 받음
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        
-        layout()
         setButtonSize()
     }
     
@@ -27,8 +27,9 @@ class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layout() {
-        titleLabel?.font = .systemFont(ofSize: 40)
+    // MARK: setTitle 하는 button에만 적용하기 위해 init 호출에서 아래 withImage.sink 부분으로 이동
+    private func setTitleLayout() {
+        
         
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
@@ -38,15 +39,25 @@ class Button: UIButton {
         // default button width = (screen.width - 16 * 2 - 8 * 3) / 4
         // zero button width = (screen.width - 16 * 2 - 8) / 2
         mainVM.screen
-            .combineLatest(isZero)
-            .sink { [weak self] screen, isZero in
+            .combineLatest(isZero, withImage)
+            .sink { [weak self] screen, isZero, withImage in
+                
+                let buttonSize = (screen.width - 56) / 4
+                
                 if isZero {
                     self?.widthAnchor.constraint(equalToConstant: (screen.width - 40) / 2).isActive = true
                 } else {
-                    self?.widthAnchor.constraint(equalToConstant: (screen.width - 56) / 4).isActive = true
+                    self?.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
                 }
-                self?.heightAnchor.constraint(equalToConstant: (screen.width - 56) / 4).isActive = true
-                self?.layer.cornerRadius = (screen.width - 56) / 8
+                self?.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
+                
+                self?.layer.cornerRadius = buttonSize / 2
+                
+                if withImage {
+                    self?.imageSize.send(buttonSize / 2)
+                } else {
+                    self?.titleLabel?.font = .systemFont(ofSize: buttonSize / 2)
+                }
             }
             .store(in: &cancellables)
     }
@@ -63,8 +74,33 @@ class Button: UIButton {
     }
     
     func setButton(_ buttonInfo: ButtonInfo) {
-        setTitle(buttonInfo.name.title, for: .normal)
         setColor(buttonInfo.role)
         addAction(mainVM.buttonTapped(buttonInfo), for: .touchUpInside)
+        
+        withImage
+            .sink { [weak self] withImage in
+                if withImage {
+                    self?.setImage(buttonInfo.name.systemName)
+                    self?.tintColor = .white
+                } else {
+                    self?.setTitle(buttonInfo.name.title, for: .normal)
+                    self?.setTitleLayout()
+                }
+            }
+            .store(in: &cancellables)
     }
+    
+    private func setImage(_ systemName: String) {
+        imageSize
+            .sink { [weak self] size in
+                let imageConfig = UIImage.SymbolConfiguration(pointSize: size, weight: .regular)
+                self?.setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)
+            }
+            .store(in: &cancellables)
+        
+    }
+}
+
+#Preview {
+    MainViewController()
 }

@@ -45,4 +45,18 @@ enum ButtonName {
         case .equal: return "="
         }
     }
+    
+    var systemName: String {
+        switch self {
+        case .ClearEntry: return "delete.left"
+        case .plusMinus: return "plus.forwardslash.minus"
+        case .percent: return "percent"
+        case .add: return "plus"
+        case .subtract: return "minus"
+        case .multiply: return "multiply"
+        case .divide: return "divide"
+        case .equal: return "equal"
+        default: return ""
+        }
+    }
 }

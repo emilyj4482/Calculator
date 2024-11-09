@@ -12,7 +12,7 @@ class ButtonArea: UIView {
     
     private var cancellables = Set<AnyCancellable>()
     
-    let mainVM = MainViewModel.shared
+    private let mainVM = MainViewModel.shared
     
     private lazy var allClearButton: Button = {
         let button = Button()
@@ -22,48 +22,56 @@ class ButtonArea: UIView {
     
     private lazy var clearEntryButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .modifier, name: .ClearEntry))
         return button
     }()
     
     private lazy var plusMinusButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .modifier, name: .plusMinus))
         return button
     }()
     
     private lazy var percentButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .modifier, name: .percent))
         return button
     }()
     
     private lazy var divideButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .operation, name: .divide))
         return button
     }()
     
     private lazy var multiplyButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .operation, name: .multiply))
         return button
     }()
     
     private lazy var subtractButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .operation, name: .subtract))
         return button
     }()
     
     private lazy var addButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .operation, name: .add))
         return button
     }()
     
     private lazy var equalButton: Button = {
         let button = Button()
+        button.withImage.send(true)
         button.setButton(.init(role: .operation, name: .equal))
         return button
     }()
