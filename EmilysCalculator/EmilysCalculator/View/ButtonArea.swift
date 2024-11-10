@@ -23,7 +23,7 @@ class ButtonArea: UIView {
     private lazy var clearEntryButton: Button = {
         let button = Button()
         button.withImage.send(true)
-        button.setButton(.init(role: .modifier, name: .ClearEntry))
+        button.setButton(.init(role: .modifier, name: .clearEntry))
         return button
     }()
     
@@ -242,9 +242,9 @@ class ButtonArea: UIView {
 extension ButtonArea {
     private func toggleClearButton() {
         mainVM.$showAC
-            .sink { [weak self] hideAC in
-                self?.allClearButton.isHidden = !hideAC
-                self?.clearEntryButton.isHidden = hideAC
+            .sink { [weak self] showAC in
+                self?.allClearButton.isHidden = !showAC
+                self?.clearEntryButton.isHidden = showAC
             }
             .store(in: &cancellables)
     }

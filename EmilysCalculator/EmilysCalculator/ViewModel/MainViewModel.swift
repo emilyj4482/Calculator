@@ -69,7 +69,7 @@ final class MainViewModel {
         switch buttonName {
         case .allClear:
             return UIAction { [weak self] _ in self?.numbersTypedIn = "0" }
-        case .ClearEntry:
+        case .clearEntry:
             return UIAction { [weak self] _ in
                 guard var modifiedText = self?.numbersTypedIn else { return }
                 self?.service.clearEntry(&modifiedText)

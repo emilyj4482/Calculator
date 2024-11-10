@@ -18,7 +18,7 @@ enum ButtonRole {
 
 enum ButtonName {
     case one, two, three, four, five, six, seven, eight, nine, zero, decimal
-    case allClear, ClearEntry, plusMinus, percent
+    case allClear, clearEntry, plusMinus, percent
     case add, subtract, multiply, divide, equal
     
     var title: String {
@@ -35,20 +35,13 @@ enum ButtonName {
         case .zero: return "0"
         case .decimal: return "."
         case .allClear: return "AC"
-        case .ClearEntry: return "CE"
-        case .plusMinus: return "+/-"
-        case .percent: return "%"
-        case .add: return "+"
-        case .subtract: return "-"
-        case .multiply: return "*"
-        case .divide: return "/"
-        case .equal: return "="
+        default: return ""
         }
     }
     
     var systemName: String {
         switch self {
-        case .ClearEntry: return "delete.left"
+        case .clearEntry: return "delete.left"
         case .plusMinus: return "plus.forwardslash.minus"
         case .percent: return "percent"
         case .add: return "plus"
