@@ -35,7 +35,14 @@ enum ButtonName {
         case .zero: return "0"
         case .decimal: return "."
         case .allClear: return "AC"
-        default: return ""
+        case .clearEntry: return "CE"
+        case .plusMinus: return "+/-"
+        case .percent: return "%"
+        case .add: return "+"
+        case .subtract: return "-"
+        case .multiply: return "*"
+        case .divide: return "/"
+        case .equal: return "="
         }
     }
     
