@@ -29,8 +29,6 @@ class Button: UIButton {
     
     // MARK: setTitle 하는 button에만 적용하기 위해 init 호출에서 아래 withImage.sink 부분으로 이동
     private func setTitleLayout() {
-        
-        
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
     }
@@ -54,7 +52,7 @@ class Button: UIButton {
                 self?.layer.cornerRadius = buttonSize / 2
                 
                 if withImage {
-                    self?.imageSize.send(buttonSize / 2)
+                    self?.imageSize.send(buttonSize / 2.5)
                 } else {
                     self?.titleLabel?.font = .systemFont(ofSize: buttonSize / 2)
                 }
@@ -97,7 +95,6 @@ class Button: UIButton {
                 self?.setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)
             }
             .store(in: &cancellables)
-        
     }
 }
 
