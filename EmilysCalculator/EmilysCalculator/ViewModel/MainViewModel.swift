@@ -11,7 +11,7 @@ import Combine
 final class MainViewModel {
     
     // 변수명 바꿔야 할 것 같은데...
-    @Published var numbersTypedIn: String = ""
+    @Published var numbersTypedIn: String = "0"
     @Published var calculationResult: String?
     
     static let shared = MainViewModel()
@@ -87,7 +87,7 @@ final class MainViewModel {
     private func toggleClearButton() {
         $numbersTypedIn
             .sink { [weak self] text in
-                self?.showAC = text.count < 2
+                self?.showAC = text == "0"
             }
             .store(in: &cancellables)
     }

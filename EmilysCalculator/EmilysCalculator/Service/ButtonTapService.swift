@@ -21,7 +21,11 @@ class ButtonTapService {
     }
     
     func clearEntry(_ text: inout String) {
-        text.removeLast()
+        if text.count == 1 {
+            text = "0"
+        } else {
+            text.removeLast()
+        }
     }
     
 }
