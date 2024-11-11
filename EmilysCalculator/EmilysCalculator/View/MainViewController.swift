@@ -19,6 +19,8 @@ class MainViewController: UIViewController {
         return label
     }()
     
+    private lazy var buttonView = VerticalStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +33,7 @@ class MainViewController: UIViewController {
     }
     
     private func addSubview() {
-        [inputLabel]
+        [inputLabel, buttonView]
             .forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +50,11 @@ class MainViewController: UIViewController {
             inputLabel.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: offset),
             inputLabel.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -offset),
             inputLabel.topAnchor.constraint(equalTo: superView.topAnchor, constant: 200),
+            inputLabel.heightAnchor.constraint(equalToConstant: 100),
+            
+            buttonView.topAnchor.constraint(equalTo: inputLabel.bottomAnchor, constant: 60),
+            buttonView.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
+            buttonView.widthAnchor.constraint(equalToConstant: 350)
         ])
     }
     
