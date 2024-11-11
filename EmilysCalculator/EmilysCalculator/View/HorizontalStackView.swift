@@ -19,6 +19,7 @@ class HorizontalStackView: UIStackView {
     
     private func layout() {
         axis = .horizontal
+        backgroundColor = .black
         spacing = 10
         distribution = .fillEqually
         

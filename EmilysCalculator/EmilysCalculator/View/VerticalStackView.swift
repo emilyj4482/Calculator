@@ -51,7 +51,7 @@ class VerticalStackView: UIStackView {
     private lazy var fourthHStack: HorizontalStackView = {
         let stackView = HorizontalStackView()
         
-        let clearButton = Button(buttonInfo: .init(role: .number, name: .clear))
+        let clearButton = Button(buttonInfo: .init(role: .operation, name: .clear))
         let zeroButton = Button(buttonInfo: .init(role: .number, name: .zero))
         let equalButton = Button(buttonInfo: .init(role: .number, name: .equal))
         let divideButton = Button(buttonInfo: .init(role: .operation, name: .divide))
@@ -74,11 +74,12 @@ class VerticalStackView: UIStackView {
     
     private func layout() {
         axis = .vertical
+        backgroundColor = .black
         spacing = 10
         distribution = .fillEqually
     }
     
-    func addSubviews() {
+    private func addSubviews() {
         [firstHStack, secondHStack, thirdHStack, fourthHStack]
             .forEach {
                 addArrangedSubview($0)
