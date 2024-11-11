@@ -14,6 +14,7 @@ class Button: UIButton {
         self.buttonInfo = buttonInfo
         super.init(frame: .zero)
         layout()
+        setColor()
         setButton()
     }
     
@@ -22,11 +23,22 @@ class Button: UIButton {
     }
     
     private func layout() {
-        frame.size.height = 80
-        frame.size.width = 80
         layer.cornerRadius = 40
+        translatesAutoresizingMaskIntoConstraints = false
         
-        setColor()
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: 80),
+            heightAnchor.constraint(equalToConstant: 80),
+        ])
+    }
+    
+    private func setColor() {
+        switch buttonInfo.role {
+        case .number:
+            backgroundColor = .numbersButtonColor
+        case .operation:
+            backgroundColor = .operatorButtonColor
+        }
     }
     
     private func setButton() {
@@ -40,15 +52,6 @@ class Button: UIButton {
 }
 
 extension Button {
-    private func setColor() {
-        switch buttonInfo.role {
-        case .number:
-            backgroundColor = .numbersButtonColor
-        case .operation:
-            backgroundColor = .operatorButtonColor
-        }
-    }
-    
     private func setTitle(_ title: String) {
         titleLabel?.font = .boldSystemFont(ofSize: 30)
         setTitle(title, for: .normal)
@@ -61,8 +64,4 @@ extension Button {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)
     }
-}
-
-#Preview {
-    MainViewController()
 }
