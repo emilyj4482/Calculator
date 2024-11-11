@@ -8,7 +8,6 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
     private lazy var inputLabel: UILabel = {
         let label = UILabel()
         
@@ -56,7 +55,7 @@ class MainViewController: UIViewController {
     }
     
     private func bind() {
-        inputLabel.text = "12345"
+        inputLabel.text = "0"
     }
 }
 

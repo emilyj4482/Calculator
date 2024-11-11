@@ -16,6 +16,7 @@ class Button: UIButton {
         layout()
         setColor()
         setButton()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -49,6 +50,10 @@ class Button: UIButton {
             setTitle(buttonInfo.name.title)
         }
     }
+    
+    private func addTarget() {
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
 }
 
 extension Button {
@@ -63,5 +68,11 @@ extension Button {
         tintColor = .white
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)
+    }
+}
+
+extension Button {
+    @objc func buttonTapped() {
+        print(buttonInfo.name)
     }
 }

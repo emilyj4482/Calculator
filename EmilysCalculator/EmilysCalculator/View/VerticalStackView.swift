@@ -8,7 +8,6 @@
 import UIKit
 
 class VerticalStackView: UIStackView {
-    
     private lazy var firstHStack: HorizontalStackView = {
         let stackView = HorizontalStackView()
         
