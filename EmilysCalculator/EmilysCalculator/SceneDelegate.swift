@@ -18,10 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.backgroundColor = .black
         window?.rootViewController = MainViewController()
         window?.makeKeyAndVisible()
-        
-        // screen 크기 전송
-        let vm = MainViewModel.shared
-        vm.screen.send((width: windowScene.screen.bounds.width, height: windowScene.screen.bounds.height))
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

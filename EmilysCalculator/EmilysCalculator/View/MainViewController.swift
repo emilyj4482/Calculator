@@ -6,25 +6,18 @@
 //
 
 import UIKit
-import Combine
 
 class MainViewController: UIViewController {
-    
-    private var cancellables = Set<AnyCancellable>()
-    
-    let mainVM = MainViewModel.shared
     
     private lazy var inputLabel: UILabel = {
         let label = UILabel()
         
         label.textColor = .white
-        label.font = .systemFont(ofSize: 75, weight: .medium)
+        label.font = .systemFont(ofSize: 60, weight: .bold)
         label.textAlignment = .right
         
         return label
     }()
-    
-    private lazy var buttonArea: UIView = ButtonArea()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +31,7 @@ class MainViewController: UIViewController {
     }
     
     private func addSubview() {
-        [inputLabel, buttonArea]
+        [inputLabel]
             .forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -46,38 +39,25 @@ class MainViewController: UIViewController {
     }
     
     private func layout() {
-        
-        setButtonAreaHeight()
-        
         let superView = view.safeAreaLayoutGuide
         
-        let inset: CGFloat = 16.0
+        let offset: CGFloat = 30.0
         
         NSLayoutConstraint.activate([
-            buttonArea.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: inset),
-            buttonArea.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset),
-            buttonArea.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset),
             
-            inputLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
-            inputLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
-            inputLabel.widthAnchor.constraint(equalTo: buttonArea.widthAnchor)
+            inputLabel.leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: offset),
+            inputLabel.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -offset),
+            inputLabel.topAnchor.constraint(equalTo: superView.topAnchor, constant: 200),
         ])
     }
     
-    private func setButtonAreaHeight() {
-        // ButtonArea 높이 = 화면 전체 높이의 60%
-        mainVM.screen
-            .sink { [weak self] screen in
-                self?.buttonArea.heightAnchor.constraint(equalToConstant: screen.height * 0.6).isActive = true
-            }
-            .store(in: &cancellables)
-    }
-    
     private func bind() {
-        inputLabel.text = "0"
+        inputLabel.text = "12345"
     }
 }
 
 #Preview {
     MainViewController()
 }
+
+

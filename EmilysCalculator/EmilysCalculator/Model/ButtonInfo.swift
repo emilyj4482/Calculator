@@ -13,13 +13,12 @@ struct ButtonInfo {
 }
 
 enum ButtonRole {
-    case number, operation, modifier
+    case number, operation
 }
 
 enum ButtonName {
-    case one, two, three, four, five, six, seven, eight, nine, zero, decimal
-    case allClear, clearEntry, plusMinus, percent
-    case add, subtract, multiply, divide, equal
+    case one, two, three, four, five, six, seven, eight, nine, zero
+    case clear, add, subtract, multiply, divide, equal
     
     var title: String {
         switch self {
@@ -33,11 +32,7 @@ enum ButtonName {
         case .eight: return "8"
         case .nine: return "9"
         case .zero: return "0"
-        case .decimal: return "."
-        case .allClear: return "AC"
-        case .clearEntry: return "CE"
-        case .plusMinus: return "+/-"
-        case .percent: return "%"
+        case .clear: return "AC"
         case .add: return "+"
         case .subtract: return "-"
         case .multiply: return "*"
@@ -48,15 +43,19 @@ enum ButtonName {
     
     var systemName: String {
         switch self {
-        case .clearEntry: return "delete.left"
-        case .plusMinus: return "plus.forwardslash.minus"
-        case .percent: return "percent"
         case .add: return "plus"
         case .subtract: return "minus"
         case .multiply: return "multiply"
         case .divide: return "divide"
         case .equal: return "equal"
         default: return ""
+        }
+    }
+    
+    var withImage: Bool {
+        switch self {
+        case .add, .subtract, .multiply, .divide, .equal : true
+        default: false
         }
     }
 }
