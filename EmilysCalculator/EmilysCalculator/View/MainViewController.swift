@@ -14,18 +14,7 @@ class MainViewController: UIViewController {
     
     let mainVM = MainViewModel.shared
     
-    private lazy var processLabel: UILabel = {
-        let label = UILabel()
-        
-        label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 35, weight: .regular)
-        label.textAlignment = .right
-        // label.isHidden = true
-        
-        return label
-    }()
-    
-    private lazy var resultLabel: UILabel = {
+    private lazy var inputLabel: UILabel = {
         let label = UILabel()
         
         label.textColor = .white
@@ -45,12 +34,11 @@ class MainViewController: UIViewController {
         
         addSubview()
         layout()
-        // bind()
-        sink()
+        bind()
     }
     
     private func addSubview() {
-        [processLabel, resultLabel, buttonArea]
+        [inputLabel, buttonArea]
             .forEach {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
@@ -70,13 +58,9 @@ class MainViewController: UIViewController {
             buttonArea.trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: -inset),
             buttonArea.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -inset),
             
-            resultLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
-            resultLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
-            resultLabel.widthAnchor.constraint(equalTo: buttonArea.widthAnchor),
-            
-            processLabel.trailingAnchor.constraint(equalTo: resultLabel.trailingAnchor),
-            processLabel.bottomAnchor.constraint(equalTo: resultLabel.topAnchor),
-            processLabel.widthAnchor.constraint(equalTo: resultLabel.widthAnchor)
+            inputLabel.trailingAnchor.constraint(equalTo: buttonArea.trailingAnchor),
+            inputLabel.bottomAnchor.constraint(equalTo: buttonArea.topAnchor, constant: -8.0),
+            inputLabel.widthAnchor.constraint(equalTo: buttonArea.widthAnchor)
         ])
     }
     
@@ -90,18 +74,8 @@ class MainViewController: UIViewController {
     }
     
     private func bind() {
-        resultLabel.text = "0"
-        processLabel.text = ""
+        inputLabel.text = "0"
     }
-    
-    private func sink() {
-        mainVM.$numbersTypedIn
-            .sink { [weak self] text in
-                self?.resultLabel.text = text
-            }
-            .store(in: &cancellables)
-    }
-    
 }
 
 #Preview {

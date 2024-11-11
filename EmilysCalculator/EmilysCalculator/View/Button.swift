@@ -13,8 +13,7 @@ class Button: UIButton {
     private var cancellables = Set<AnyCancellable>()
     
     private let mainVM = MainViewModel.shared
-    
-    let isZero: CurrentValueSubject<Bool, Never> = .init(false)
+
     let withImage: CurrentValueSubject<Bool, Never> = .init(false)  // UIImage(systemName: )을 통해 버튼 설정하는지 여부
     private let imageSize = PassthroughSubject<CGFloat, Never>()    // auto layout을 위해 size 전송 받음
     
@@ -37,18 +36,12 @@ class Button: UIButton {
         // default button width = (screen.width - 16 * 2 - 8 * 3) / 4
         // zero button width = (screen.width - 16 * 2 - 8) / 2
         mainVM.screen
-            .combineLatest(isZero, withImage)
-            .sink { [weak self] screen, isZero, withImage in
-                
+            .combineLatest(withImage)
+            .sink { [weak self] screen, withImage in
                 let buttonSize = (screen.width - 56) / 4
                 
-                if isZero {
-                    self?.widthAnchor.constraint(equalToConstant: (screen.width - 40) / 2).isActive = true
-                } else {
-                    self?.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
-                }
+                self?.widthAnchor.constraint(equalToConstant: buttonSize).isActive = true
                 self?.heightAnchor.constraint(equalToConstant: buttonSize).isActive = true
-                
                 self?.layer.cornerRadius = buttonSize / 2
                 
                 if withImage {
@@ -73,7 +66,6 @@ class Button: UIButton {
     
     func setButton(_ buttonInfo: ButtonInfo) {
         setColor(buttonInfo.role)
-        addAction(mainVM.buttonTapped(buttonInfo), for: .touchUpInside)
         
         withImage
             .sink { [weak self] withImage in
