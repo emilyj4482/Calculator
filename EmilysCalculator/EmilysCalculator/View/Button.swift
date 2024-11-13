@@ -8,7 +8,10 @@
 import UIKit
 
 class Button: UIButton {
-    let buttonInfo: ButtonInfo
+    
+    private let service: ButtonTapServiceType = ButtonTapService()
+    
+    private let buttonInfo: ButtonInfo
     
     init(buttonInfo: ButtonInfo) {
         self.buttonInfo = buttonInfo
@@ -73,6 +76,6 @@ extension Button {
 
 extension Button {
     @objc func buttonTapped() {
-        print(buttonInfo.name)
+        service.buttonTapped(of: buttonInfo)
     }
 }
