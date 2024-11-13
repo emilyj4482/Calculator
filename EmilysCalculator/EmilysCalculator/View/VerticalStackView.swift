@@ -52,7 +52,7 @@ class VerticalStackView: UIStackView {
         
         let clearButton = Button(buttonInfo: .init(role: .operation, name: .clear))
         let zeroButton = Button(buttonInfo: .init(role: .number, name: .zero))
-        let equalButton = Button(buttonInfo: .init(role: .number, name: .equal))
+        let equalButton = Button(buttonInfo: .init(role: .operation, name: .equal))
         let divideButton = Button(buttonInfo: .init(role: .operation, name: .divide))
         
         stackView.addSubviews([clearButton, zeroButton, equalButton, divideButton])

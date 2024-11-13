@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private let vm = MainViewModel.shared
+    private let buttonTapService = ButtonTapService.shared
     
     private lazy var inputLabel: UILabel = {
         let label = UILabel()
@@ -61,7 +61,7 @@ class MainViewController: UIViewController {
     }
     
     private func bind() {
-        vm.$inputLabelText
+        buttonTapService.$textStack
             .sink { [weak self] text in
                 self?.inputLabel.text = text
             }

@@ -8,36 +8,48 @@
 import Foundation
 
 protocol ButtonTapServiceType {
-    func buttonTapped(of buttonInfo: ButtonInfo)
+    
 }
 
 class ButtonTapService: ButtonTapServiceType {
     
-    private let vm = MainViewModel.shared
+    static let shared = ButtonTapService()
     
-    private var tappedButtonTypes: [ButtonRole] = []
+    private init() {}
     
+    @Published var textStack: String = "0"
+    
+    private var lastTappedButton: ButtonInfo?
     
     func buttonTapped(of buttonInfo: ButtonInfo) {
-        // tappedButtonTypes.append(buttonInfo.role)
-        switch buttonInfo.name {
-        case .clear:
-            clearText()
-        default:
+        switch buttonInfo.role {
+        case .number:
+            // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
             appendText(buttonInfo.name.title)
+        case .operation:
+            if buttonInfo.name == .clear {
+                clearText()
+            } else if lastTappedButton == nil || lastTappedButton?.role == .operation {
+                print("Nothing happens")
+            } else if buttonInfo.name == .equal {
+                // TODO: 계산
+                print("definition of calcalation func in progress")
+            } else {
+                appendText(buttonInfo.name.title)
+            }
         }
-        
+        lastTappedButton = buttonInfo
     }
     
     private func appendText(_ text: String) {
-        if vm.inputLabelText == "0" {
-            vm.inputLabelText = text
+        if textStack == "0" {
+            textStack = text
         } else {
-            vm.inputLabelText.append(text)
+            textStack.append(text)
         }
     }
     
     private func clearText() {
-        vm.inputLabelText = "0"
+        textStack = "0"
     }
 }
