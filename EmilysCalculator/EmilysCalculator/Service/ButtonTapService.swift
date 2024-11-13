@@ -19,8 +19,25 @@ class ButtonTapService: ButtonTapServiceType {
     
     
     func buttonTapped(of buttonInfo: ButtonInfo) {
-        tappedButtonTypes.append(buttonInfo.role)
-        print(buttonInfo.name.title)
-        vm.inputLabelText.append(buttonInfo.name.title)
+        // tappedButtonTypes.append(buttonInfo.role)
+        switch buttonInfo.name {
+        case .clear:
+            clearText()
+        default:
+            appendText(buttonInfo.name.title)
+        }
+        
+    }
+    
+    private func appendText(_ text: String) {
+        if vm.inputLabelText == "0" {
+            vm.inputLabelText = text
+        } else {
+            vm.inputLabelText.append(text)
+        }
+    }
+    
+    private func clearText() {
+        vm.inputLabelText = "0"
     }
 }

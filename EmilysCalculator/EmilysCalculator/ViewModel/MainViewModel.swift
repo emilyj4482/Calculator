@@ -10,7 +10,6 @@ import Foundation
 final class MainViewModel {
     static let shared = MainViewModel()
     
-    @Published var inputLabelText: String = ""
-    
+    @Published var inputLabelText: String = "0"
     
 }
