@@ -9,10 +9,12 @@ import Foundation
 
 enum CustomError: Error {
     case convertingFailed
+    case dividedByZero
     
     var localizedDescription: String {
         switch self {
         case .convertingFailed: "[ERROR] Converting to Int failed."
+        case .dividedByZero: "[ERROR] Cannot divide by zero."
         }
     }
 }
