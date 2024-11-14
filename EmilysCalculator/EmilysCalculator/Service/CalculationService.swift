@@ -12,7 +12,11 @@ protocol CalculationServiceType {
 }
 
 class CalculationService: CalculationServiceType {
-    func calculate(_ expression: String) {
-        
+    func calculate(_ expression: String) -> Result<Int, CustomError> {
+        let expression = NSExpression(format: expression)
+        guard let result = expression.expressionValue(with: nil, context: nil) as? Int else {
+            return .failure(CustomError.convertingFailed)
+        }
+        return .success(result)
     }
 }

@@ -32,8 +32,7 @@ class ButtonTapService: ButtonTapServiceType {
             } else if lastTappedButton == nil || lastTappedButton?.role == .operation {
                 print("Nothing happens")
             } else if buttonInfo.name == .equal {
-                // TODO: 계산
-                print("definition of calcalation func in progress")
+                getResultText()
             } else {
                 appendText(buttonInfo.name.title)
             }
@@ -51,5 +50,16 @@ class ButtonTapService: ButtonTapServiceType {
     
     private func clearText() {
         textStack = "0"
+    }
+    
+    private func getResultText() {
+        let calculationService = CalculationService()
+        switch calculationService.calculate(textStack) {
+        case .success(let result):
+            textStack = String(result)
+        case .failure(let error):
+            print(error.localizedDescription)
+            textStack = "Error"
+        }
     }
 }
