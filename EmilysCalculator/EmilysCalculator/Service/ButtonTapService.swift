@@ -24,14 +24,19 @@ class ButtonTapService: ButtonTapServiceType {
     func buttonTapped(of buttonInfo: ButtonInfo) {
         switch buttonInfo.role {
         case .number:
-            if textStack == "0" {
+            if textStack == "Error" {
+                
+            } else if textStack == "0" {
                 replaceText(buttonInfo.name.title)
             } else {
                 appendText(buttonInfo.name.title)
             }
             // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
         case .operation:
-            if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
+            // TODO: *- 누른 다음에 *+로 바뀌는 게 아니라 +로 되게 하기
+            if textStack == "Error" {
+                
+            } else if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
                 replaceLastest(buttonInfo.name.title)
             } else if buttonInfo.name == .subtract && (textStack == "0" || lastTappedButton?.name == .add) {
                 replaceText(buttonInfo.name.title)
