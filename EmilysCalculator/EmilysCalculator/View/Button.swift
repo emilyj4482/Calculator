@@ -40,7 +40,7 @@ class Button: UIButton {
         switch buttonInfo.role {
         case .number:
             backgroundColor = .numbersButtonColor
-        case .operation:
+        case .operation, .completer:
             backgroundColor = .operatorButtonColor
         }
     }

@@ -13,12 +13,13 @@ struct ButtonInfo {
 }
 
 enum ButtonRole {
-    case number, operation
+    case number, operation, completer
 }
 
 enum ButtonName {
     case one, two, three, four, five, six, seven, eight, nine, zero
-    case clear, add, subtract, multiply, divide, equal
+    case add, subtract, multiply, divide
+    case clear, equal
     
     var title: String {
         switch self {

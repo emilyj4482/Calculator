@@ -24,28 +24,37 @@ class ButtonTapService: ButtonTapServiceType {
     func buttonTapped(of buttonInfo: ButtonInfo) {
         switch buttonInfo.role {
         case .number:
-            // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
-            appendText(buttonInfo.name.title)
-        case .operation:
-            if buttonInfo.name == .clear {
-                clearText()
-            } else if lastTappedButton == nil || lastTappedButton?.role == .operation {
-                print("Nothing happens")
-            } else if buttonInfo.name == .equal {
-                getResultText()
+            if textStack == "0" {
+                replaceText(buttonInfo.name.title)
             } else {
                 appendText(buttonInfo.name.title)
+            }
+            // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
+        case .operation:
+            if lastTappedButton?.role == .operation {
+                // TODO: 무처리 말고 연산자 대체로 변경
+            } else {
+                appendText(buttonInfo.name.title)
+                // TODO: -는 0을 대체하도록 처리
+            }
+        case .completer:
+            if buttonInfo.name == .clear {
+                clearText()
+            } else if lastTappedButton?.role == .operation {
+                print("Nothing happens")
+            } else {
+                getResultText()
             }
         }
         lastTappedButton = buttonInfo
     }
     
+    private func replaceText(_ text: String) {
+        textStack = text
+    }
+    
     private func appendText(_ text: String) {
-        if textStack == "0" {
-            textStack = text
-        } else {
-            textStack.append(text)
-        }
+        textStack.append(text)
     }
     
     private func clearText() {

@@ -50,9 +50,9 @@ class VerticalStackView: UIStackView {
     private lazy var fourthHStack: HorizontalStackView = {
         let stackView = HorizontalStackView()
         
-        let clearButton = Button(buttonInfo: .init(role: .operation, name: .clear))
+        let clearButton = Button(buttonInfo: .init(role: .completer, name: .clear))
         let zeroButton = Button(buttonInfo: .init(role: .number, name: .zero))
-        let equalButton = Button(buttonInfo: .init(role: .operation, name: .equal))
+        let equalButton = Button(buttonInfo: .init(role: .completer, name: .equal))
         let divideButton = Button(buttonInfo: .init(role: .operation, name: .divide))
         
         stackView.addSubviews([clearButton, zeroButton, equalButton, divideButton])
