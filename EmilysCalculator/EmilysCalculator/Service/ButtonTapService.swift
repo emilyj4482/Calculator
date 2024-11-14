@@ -31,11 +31,12 @@ class ButtonTapService: ButtonTapServiceType {
             }
             // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
         case .operation:
-            if lastTappedButton?.role == .operation {
-                // TODO: 무처리 말고 연산자 대체로 변경
+            if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
+                replaceLastest(buttonInfo.name.title)
+            } else if textStack == "0" && buttonInfo.name == .subtract {
+                replaceText(buttonInfo.name.title)
             } else {
                 appendText(buttonInfo.name.title)
-                // TODO: -는 0을 대체하도록 처리
             }
         case .completer:
             if buttonInfo.name == .clear {
@@ -70,5 +71,10 @@ class ButtonTapService: ButtonTapServiceType {
             print(error.localizedDescription)
             textStack = "Error"
         }
+    }
+    
+    private func replaceLastest(_ text: String) {
+        textStack.removeLast()
+        textStack.append(text)
     }
 }
