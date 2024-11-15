@@ -39,7 +39,7 @@ class ButtonTapService: ButtonTapServiceType {
             } else if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
                 replaceLastest(buttonInfo.name.title)
             } else if buttonInfo.name == .subtract && (textStack == "0" || lastTappedButton?.name == .add) {
-                replaceText(buttonInfo.name.title)
+                replaceLastest(buttonInfo.name.title)
             } else {
                 appendText(buttonInfo.name.title)
             }
