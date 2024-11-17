@@ -26,33 +26,21 @@ class ButtonTapService: ButtonTapServiceType {
         case .number:
             if textStack == "Error" {
                 
-            } else if textStack == "0" {
-                replaceText(buttonInfo.name.title)
             } else {
-                appendText(buttonInfo.name.title)
+                numberButtaonTapped(of: buttonInfo)
+                lastTappedButton = buttonInfo
             }
-            // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
         case .operation:
-            // TODO: *- 누른 다음에 *+로 바뀌는 게 아니라 +로 되게 하기
             if textStack == "Error" {
                 
-            } else if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
-                replaceLastest(buttonInfo.name.title)
-            } else if buttonInfo.name == .subtract && (textStack == "0" || lastTappedButton?.name == .add) {
-                replaceLastest(buttonInfo.name.title)
             } else {
-                appendText(buttonInfo.name.title)
+                operationButtonTapped(of: buttonInfo)
+                lastTappedButton = buttonInfo
             }
         case .completer:
-            if buttonInfo.name == .clear {
-                clearText()
-            } else if lastTappedButton?.role == .operation {
-                print("Nothing happens")
-            } else {
-                getResultText()
-            }
+            completerButtonTapped(of: buttonInfo)
+            lastTappedButton = buttonInfo
         }
-        lastTappedButton = buttonInfo
     }
     
     private func replaceText(_ text: String) {
@@ -81,5 +69,37 @@ class ButtonTapService: ButtonTapServiceType {
     private func replaceLastest(_ text: String) {
         textStack.removeLast()
         textStack.append(text)
+    }
+}
+
+extension ButtonTapService {
+    private func numberButtaonTapped(of buttonInfo: ButtonInfo) {
+        if textStack == "0" {
+            replaceText(buttonInfo.name.title)
+        } else {
+            appendText(buttonInfo.name.title)
+        }
+        // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
+    }
+    
+    private func operationButtonTapped(of buttonInfo: ButtonInfo) {
+        if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
+            replaceLastest(buttonInfo.name.title)
+        } else if buttonInfo.name == .subtract && (textStack == "0" || lastTappedButton?.name == .add) {
+            replaceLastest(buttonInfo.name.title)
+        } else {
+            appendText(buttonInfo.name.title)
+        }
+        // TODO: *- 누른 다음에 *+로 바뀌는 게 아니라 +로 되게 하기
+    }
+    
+    private func completerButtonTapped(of buttonInfo: ButtonInfo) {
+        if buttonInfo.name == .clear {
+            clearText()
+        } else if lastTappedButton?.role == .operation {
+            print("Nothing happens")
+        } else {
+            getResultText()
+        }
     }
 }
