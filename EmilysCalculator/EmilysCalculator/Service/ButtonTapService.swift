@@ -24,16 +24,12 @@ class ButtonTapService: ButtonTapServiceType {
     func buttonTapped(of buttonInfo: ButtonInfo) {
         switch buttonInfo.role {
         case .number:
-            if textStack == "Error" {
-                
-            } else {
-                numberButtaonTapped(of: buttonInfo)
+            if textStack == "Error" {} else {
+                numberButtonTapped(of: buttonInfo)
                 lastTappedButton = buttonInfo
             }
         case .operation:
-            if textStack == "Error" {
-                
-            } else {
+            if textStack == "Error" {} else {
                 operationButtonTapped(of: buttonInfo)
                 lastTappedButton = buttonInfo
             }
@@ -73,7 +69,7 @@ class ButtonTapService: ButtonTapServiceType {
 }
 
 extension ButtonTapService {
-    private func numberButtaonTapped(of buttonInfo: ButtonInfo) {
+    private func numberButtonTapped(of buttonInfo: ButtonInfo) {
         if textStack == "0" {
             replaceText(buttonInfo.name.title)
         } else {
