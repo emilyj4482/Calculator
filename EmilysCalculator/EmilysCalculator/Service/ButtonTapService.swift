@@ -19,23 +19,22 @@ class ButtonTapService: ButtonTapServiceType {
     
     @Published var textStack: String = "0"
     
-    private var lastTappedButton: ButtonInfo?
+    private var buttonTapHistory: (ButtonInfo?, ButtonInfo?)
     
     func buttonTapped(of buttonInfo: ButtonInfo) {
         switch buttonInfo.role {
         case .number:
             if textStack == "Error" {} else {
                 numberButtonTapped(of: buttonInfo)
-                lastTappedButton = buttonInfo
             }
         case .operation:
             if textStack == "Error" {} else {
                 operationButtonTapped(of: buttonInfo)
-                lastTappedButton = buttonInfo
+                updateButtonTapHistory(buttonInfo)
             }
         case .completer:
             completerButtonTapped(of: buttonInfo)
-            lastTappedButton = buttonInfo
+            updateButtonTapHistory(buttonInfo)
         }
     }
     
@@ -66,22 +65,31 @@ class ButtonTapService: ButtonTapServiceType {
         textStack.removeLast()
         textStack.append(text)
     }
+    
+    private func updateButtonTapHistory(_ buttonInfo: ButtonInfo) {
+        buttonTapHistory.0 = buttonTapHistory.1
+        buttonTapHistory.1 = buttonInfo
+        print(buttonTapHistory)
+    }
 }
 
 extension ButtonTapService {
     private func numberButtonTapped(of buttonInfo: ButtonInfo) {
         if textStack == "0" {
             replaceText(buttonInfo.name.title)
+            updateButtonTapHistory(buttonInfo)
+        } else if buttonTapHistory.0?.role == .operation && buttonTapHistory.1?.name == .zero && buttonInfo.name == .zero {
+            print("No double zero after operator.")
         } else {
             appendText(buttonInfo.name.title)
+            updateButtonTapHistory(buttonInfo)
         }
-        // TODO: 연산자 누른 후 0 2번 이상 tap 안되게 처리
     }
     
     private func operationButtonTapped(of buttonInfo: ButtonInfo) {
-        if lastTappedButton?.role == .operation && buttonInfo.name != .subtract {
+        if buttonTapHistory.1?.role == .operation && buttonInfo.name != .subtract {
             replaceLastest(buttonInfo.name.title)
-        } else if buttonInfo.name == .subtract && (textStack == "0" || lastTappedButton?.name == .add) {
+        } else if buttonInfo.name == .subtract && (textStack == "0" || buttonTapHistory.1?.name == .add) {
             replaceLastest(buttonInfo.name.title)
         } else {
             appendText(buttonInfo.name.title)
@@ -92,7 +100,7 @@ extension ButtonTapService {
     private func completerButtonTapped(of buttonInfo: ButtonInfo) {
         if buttonInfo.name == .clear {
             clearText()
-        } else if lastTappedButton?.role == .operation {
+        } else if buttonTapHistory.1?.role == .operation {
             print("Nothing happens")
         } else {
             getResultText()
