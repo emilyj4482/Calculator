@@ -12,11 +12,12 @@ protocol CalculationServiceType {
 }
 
 class CalculationService: CalculationServiceType {
-    func calculate(_ expression: String) -> Result<Int, CustomError> {
-        guard !expression.contains("/0") else {
+    func calculate(_ text: String) -> Result<Int, CustomError> {
+        guard !text.contains("÷0") else {
             return .failure(CustomError.dividedByZero)
         }
-        let expression = NSExpression(format: expression)
+        let replacedText = text.replacingOccurrences(of: "×", with: "*").replacingOccurrences(of: "÷", with: "/")
+        let expression = NSExpression(format: replacedText)
         guard let result = expression.expressionValue(with: nil, context: nil) as? Int else {
             return .failure(CustomError.convertingFailed)
         }

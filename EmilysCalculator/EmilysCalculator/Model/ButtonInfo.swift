@@ -36,8 +36,8 @@ enum ButtonName {
         case .clear: return "AC"
         case .add: return "+"
         case .subtract: return "-"
-        case .multiply: return "*"
-        case .divide: return "/"
+        case .multiply: return "×"
+        case .divide: return "÷"
         case .equal: return "="
         }
     }
