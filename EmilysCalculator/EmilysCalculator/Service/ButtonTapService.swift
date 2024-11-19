@@ -85,8 +85,13 @@ extension ButtonTapService {
         if textStack == "0" {
             replaceText(buttonInfo.name.title)
             updateButtonTapHistory(buttonInfo)
-        } else if buttonTapHistory.0?.role == .operation && buttonTapHistory.1?.name == .zero && buttonInfo.name == .zero {
-            print("No double zero after operator.")
+        } else if buttonTapHistory.0?.role == .operation && buttonTapHistory.1?.name == .zero {
+            if buttonInfo.name == .zero {
+                print("No double zero after operator.")
+            } else {
+                replaceLastest(buttonInfo.name.title)
+                updateButtonTapHistory(buttonInfo)
+            }
         } else {
             appendText(buttonInfo.name.title)
             updateButtonTapHistory(buttonInfo)
