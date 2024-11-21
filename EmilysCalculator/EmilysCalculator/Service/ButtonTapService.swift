@@ -6,31 +6,29 @@
 //
 
 import Foundation
+import Combine
 
 protocol ButtonTapServiceType {
-    
+    var textPublisher: CurrentValueSubject<String, Never> { get set }
+    func buttonTapped(of buttonInfo: ButtonInfo)
 }
 
 class ButtonTapService: ButtonTapServiceType {
     
-    static let shared = ButtonTapService()
-    
-    private init() {}
-    
-    @Published var textStack: String = "0"
+    var textPublisher = CurrentValueSubject<String, Never>("0")
     
     private var buttonTapHistory: (ButtonInfo?, ButtonInfo?)
     
     func buttonTapped(of buttonInfo: ButtonInfo) {
         switch buttonInfo.role {
         case .number:
-            if textStack == "Error" {
+            if textPublisher.value == "Error" {
                 print("Only AC button allowed")
             } else {
                 numberButtonTapped(of: buttonInfo)
             }
         case .operation:
-            if textStack == "Error" {
+            if textPublisher.value == "Error" {
                 print("Only AC button allowed")
             } else {
                 operationButtonTapped(of: buttonInfo)
@@ -39,50 +37,53 @@ class ButtonTapService: ButtonTapServiceType {
             completerButtonTapped(of: buttonInfo)
         }
     }
-    
+}
+
+extension ButtonTapService {
     private func replaceText(_ text: String) {
-        textStack = text
+        textPublisher.send(text)
     }
     
     private func appendText(_ text: String) {
-        textStack.append(text)
+        textPublisher.send(textPublisher.value + text)
     }
     
     private func clearText() {
-        textStack = "0"
+        textPublisher.send("0")
     }
     
     private func getResultText() {
-        let calculationService = CalculationService()
-        switch calculationService.calculate(textStack) {
+        let calculationService: CalculationServiceType = CalculationService()
+        switch calculationService.calculate(textPublisher.value) {
         case .success(let result):
-            textStack = String(result)
+            textPublisher.send(String(result))
         case .failure(let error):
             print(error.localizedDescription)
-            textStack = "Error"
+            textPublisher.send("Error")
         }
     }
     
     private func replaceLastest(_ text: String) {
-        textStack.removeLast()
-        textStack.append(text)
+        var currentText = textPublisher.value
+        currentText.removeLast()
+        textPublisher.send(currentText + text)
     }
     
     private func replaceLastTwo(_ text: String) {
-        textStack.removeLast(2)
-        textStack.append(text)
+        var currentText = textPublisher.value
+        currentText.removeLast(2)
+        textPublisher.send(currentText + text)
     }
     
     private func updateButtonTapHistory(_ buttonInfo: ButtonInfo) {
         buttonTapHistory.0 = buttonTapHistory.1
         buttonTapHistory.1 = buttonInfo
-        // print(buttonTapHistory)
     }
 }
 
 extension ButtonTapService {
     private func numberButtonTapped(of buttonInfo: ButtonInfo) {
-        if textStack == "0" {
+        if textPublisher.value == "0" {
             replaceText(buttonInfo.name.title)
             updateButtonTapHistory(buttonInfo)
         } else if buttonTapHistory.0?.role == .operation && buttonTapHistory.1?.name == .zero {
@@ -105,7 +106,7 @@ extension ButtonTapService {
         } else if buttonTapHistory.1?.role == .operation && buttonInfo.name != .subtract {
             replaceLastest(buttonInfo.name.title)
             updateButtonTapHistory(buttonInfo)
-        } else if buttonInfo.name == .subtract && (textStack == "0" || buttonTapHistory.1?.name == .add) {
+        } else if buttonInfo.name == .subtract && (textPublisher.value == "0" || buttonTapHistory.1?.name == .add) {
             replaceLastest(buttonInfo.name.title)
             updateButtonTapHistory(buttonInfo)
         } else if buttonInfo.name == .subtract && buttonTapHistory.1?.name == .subtract {

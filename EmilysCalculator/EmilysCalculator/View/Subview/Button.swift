@@ -8,10 +8,7 @@
 import UIKit
 
 class Button: UIButton {
-    
-    private let buttonTapService = ButtonTapService.shared
-    
-    private let buttonInfo: ButtonInfo
+    let buttonInfo: ButtonInfo
     
     init(buttonInfo: ButtonInfo) {
         self.buttonInfo = buttonInfo
@@ -19,7 +16,6 @@ class Button: UIButton {
         layout()
         setColor()
         setButton()
-        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -36,6 +32,7 @@ class Button: UIButton {
         ])
     }
     
+    // button role에 따라 배경색 다르게 적용
     private func setColor() {
         switch buttonInfo.role {
         case .number:
@@ -45,6 +42,7 @@ class Button: UIButton {
         }
     }
     
+    // SF symbols image 적용 버튼과 title 적용 버튼 구분하여 set
     private func setButton() {
         switch buttonInfo.name.withImage {
         case true:
@@ -52,10 +50,6 @@ class Button: UIButton {
         case false:
             setTitle(buttonInfo.name.title)
         }
-    }
-    
-    private func addTarget() {
-        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
 }
 
@@ -71,11 +65,5 @@ extension Button {
         tintColor = .white
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)
-    }
-}
-
-extension Button {
-    @objc func buttonTapped() {
-        buttonTapService.buttonTapped(of: buttonInfo)
     }
 }

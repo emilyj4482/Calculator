@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CalculationServiceType {
-    
+    func calculate(_ text: String) -> Result<Int, CustomError>
 }
 
 class CalculationService: CalculationServiceType {
