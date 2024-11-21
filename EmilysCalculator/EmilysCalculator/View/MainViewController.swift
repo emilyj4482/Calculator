@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         
         view.backgroundColor = .black
         view.indicatorStyle = .white
-        view.contentAlignmentPoint.x = 1
+        view.contentAlignmentPoint = CGPoint(x: 1, y: 0.5)
         
         return view
     }()
@@ -87,8 +87,7 @@ class MainViewController: UIViewController {
         scrollView.contentSize = CGSize(width: inputLabel.intrinsicContentSize.width, height: inputLabel.bounds.height)
         
         // 스크롤을 우측에 고정
-        let rightOffset = CGPoint(x: scrollView.contentSize.width - scrollView.bounds.width, y: 0)
-        scrollView.setContentOffset(rightOffset, animated: false)
+        scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width - scrollView.bounds.width, y: 0)
     }
     
     private func bind() {
@@ -103,5 +102,3 @@ class MainViewController: UIViewController {
 #Preview {
     MainViewController()
 }
-
-
