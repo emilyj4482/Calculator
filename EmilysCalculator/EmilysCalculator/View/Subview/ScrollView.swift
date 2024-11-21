@@ -8,7 +8,6 @@
 import UIKit
 
 class ScrollView: UIScrollView {
-    
     lazy var inputLabel: UILabel = {
         let label = UILabel()
         
