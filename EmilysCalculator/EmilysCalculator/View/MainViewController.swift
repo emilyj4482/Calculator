@@ -13,27 +13,8 @@ class MainViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     private let buttonTapService = ButtonTapService.shared
-    
-    private lazy var scrollView: UIScrollView = {
-        let view = UIScrollView()
-        
-        view.backgroundColor = .black
-        view.indicatorStyle = .white
-        view.contentAlignmentPoint = CGPoint(x: 1, y: 0.5)
-        
-        return view
-    }()
-    
-    private lazy var inputLabel: UILabel = {
-        let label = UILabel()
-        
-        label.backgroundColor = .black
-        label.textColor = .white
-        label.textAlignment = .right
-        label.font = .systemFont(ofSize: 60, weight: .bold)
-        
-        return label
-    }()
+
+    private lazy var scrollView = ScrollView()
     
     private lazy var buttonView = VerticalStackView()
     
@@ -54,8 +35,6 @@ class MainViewController: UIViewController {
                 view.addSubview($0)
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
-        scrollView.addSubview(inputLabel)
-        inputLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func layout() {
@@ -70,12 +49,6 @@ class MainViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: superView.topAnchor, constant: 200),
             scrollView.heightAnchor.constraint(equalToConstant: 100),
             
-            inputLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            inputLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            inputLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            inputLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            inputLabel.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            
             buttonView.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 60),
             buttonView.centerXAnchor.constraint(equalTo: superView.centerXAnchor),
             buttonView.widthAnchor.constraint(equalToConstant: 350)
@@ -84,7 +57,7 @@ class MainViewController: UIViewController {
     
     private func setScrollView() {
         // 스크롤 뷰의 content size를 label size와 일치시킴
-        scrollView.contentSize = CGSize(width: inputLabel.intrinsicContentSize.width, height: inputLabel.bounds.height)
+        scrollView.contentSize = CGSize(width: scrollView.inputLabel.intrinsicContentSize.width, height: scrollView.inputLabel.bounds.height)
         
         // 스크롤을 우측에 고정
         scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width - scrollView.bounds.width, y: 0)
@@ -93,7 +66,7 @@ class MainViewController: UIViewController {
     private func bind() {
         buttonTapService.$textStack
             .sink { [weak self] text in
-                self?.inputLabel.text = text
+                self?.scrollView.inputLabel.text = text
             }
             .store(in: &cancellables)
     }
