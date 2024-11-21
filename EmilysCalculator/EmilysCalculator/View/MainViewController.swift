@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private let buttonTapService = ButtonTapService.shared
+    private let vm = MainViewModel()
     
     // main view 구성 : 1) label을 포함한 scroll view 2) button을 4개씩 담은 h-stack view를 4개 갖는 v-stack view
     private lazy var scrollView = ScrollView()
@@ -88,7 +88,7 @@ extension MainViewController {
     
     // label text update
     private func bind() {
-        buttonTapService.$textStack
+        vm.$inputLabelText
             .sink { [weak self] text in
                 self?.scrollView.inputLabel.text = text
             }
@@ -98,7 +98,7 @@ extension MainViewController {
 
 extension MainViewController {
     @objc func buttonTapped(_ sender: Button) {
-        buttonTapService.buttonTapped(of: sender.buttonInfo)
+        vm.send(sender.buttonInfo)
     }
 }
 
