@@ -42,7 +42,7 @@ class Button: UIButton {
         }
     }
     
-    // SF symbols image 적용 버튼과 title 적용 버튼 구분하여 set
+    // SF symbols image 적용 버튼과 title 적용 버튼 구분하여 setting 함수 호출
     private func setButton() {
         switch buttonInfo.name.withImage {
         case true:
