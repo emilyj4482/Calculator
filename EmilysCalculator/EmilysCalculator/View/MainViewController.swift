@@ -61,7 +61,6 @@ class MainViewController: UIViewController {
         var hStacks = [HorizontalStackView]()
         
         for row in 0..<4 {
-            let hStack = HorizontalStackView()
             var subviews = [Button]()
             
             for col in 0..<4 {
@@ -70,11 +69,8 @@ class MainViewController: UIViewController {
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
                 subviews.append(button)
             }
-            
-            hStack.addSubviews(subviews)
-            hStacks.append(hStack)
+            hStacks.append(HorizontalStackView(subviews))
         }
-        
         buttonView.addSubviews(hStacks)
     }
 }

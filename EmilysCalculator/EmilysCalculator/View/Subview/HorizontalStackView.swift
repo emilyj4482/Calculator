@@ -8,9 +8,10 @@
 import UIKit
 
 class HorizontalStackView: UIStackView {
-    init() {
+    init(_ subviews: [Button]) {
         super.init(frame: .zero)
         layout()
+        addSubviews(subviews)
     }
     
     required init(coder: NSCoder) {
@@ -27,7 +28,7 @@ class HorizontalStackView: UIStackView {
         heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-    func addSubviews(_ buttons: [Button]) {
+    private func addSubviews(_ buttons: [Button]) {
         buttons.forEach {
             addArrangedSubview($0)
         }
