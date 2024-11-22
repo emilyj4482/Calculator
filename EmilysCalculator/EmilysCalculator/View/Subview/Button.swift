@@ -22,7 +22,10 @@ class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layout() {
+}
+
+private extension Button {
+    func layout() {
         layer.cornerRadius = 40
         translatesAutoresizingMaskIntoConstraints = false
         
@@ -33,7 +36,7 @@ class Button: UIButton {
     }
     
     // button role에 따라 배경색 다르게 적용
-    private func setColor() {
+    func setColor() {
         switch buttonInfo.role {
         case .number:
             backgroundColor = .numbersButtonColor
@@ -43,7 +46,7 @@ class Button: UIButton {
     }
     
     // SF symbols image 적용 버튼과 title 적용 버튼 구분하여 setting 함수 호출
-    private func setButton() {
+    func setButton() {
         switch buttonInfo.name.withImage {
         case true:
             setImage(buttonInfo.name.systemName)
@@ -53,15 +56,15 @@ class Button: UIButton {
     }
 }
 
-extension Button {
-    private func setTitle(_ title: String) {
+private extension Button {
+    func setTitle(_ title: String) {
         titleLabel?.font = .boldSystemFont(ofSize: 30)
         setTitle(title, for: .normal)
         setTitleColor(.white, for: .normal)
         setTitleColor(.lightGray, for: .highlighted)
     }
     
-    private func setImage(_ systemName: String) {
+    func setImage(_ systemName: String) {
         tintColor = .white
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         setImage(UIImage(systemName: systemName, withConfiguration: imageConfig), for: .normal)

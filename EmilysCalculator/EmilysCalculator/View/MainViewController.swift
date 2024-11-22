@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    
     private var cancellables = Set<AnyCancellable>()
     
     private let vm = MainViewModel()
@@ -29,8 +28,10 @@ class MainViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         keepScrollRightHandSide()
     }
-    
-    private func addSubview() {
+}
+
+private extension MainViewController {
+    func addSubview() {
         [scrollView, buttonView]
             .forEach {
                 view.addSubview($0)
@@ -38,7 +39,7 @@ class MainViewController: UIViewController {
             }
     }
     
-    private func layout() {
+    func layout() {
         view.backgroundColor = .black
         
         let superView = view.safeAreaLayoutGuide
@@ -57,7 +58,7 @@ class MainViewController: UIViewController {
     }
     
     // view model에 선언한 ButtonInfo array 순서에 따라 버튼 생성 > 버튼 4개씩 가진 h-stack view 4개 생성 > v-stack에 추가
-    private func addButtons() {
+    func addButtons() {
         var hStacks = [HorizontalStackView]()
         
         for row in 0..<4 {
@@ -73,17 +74,15 @@ class MainViewController: UIViewController {
         }
         buttonView.addSubviews(hStacks)
     }
-}
-
-extension MainViewController {
+    
     // 스크롤이 오른쪽 끝에 위치하도록 하는 함수 (layout이 적용된 뒤 호출)
-    private func keepScrollRightHandSide() {
+    func keepScrollRightHandSide() {
         scrollView.contentSize = CGSize(width: scrollView.inputLabel.intrinsicContentSize.width, height: scrollView.inputLabel.bounds.height)
         scrollView.contentOffset = CGPoint(x: scrollView.contentSize.width - scrollView.bounds.width, y: 0)
     }
     
     // label text update
-    private func bind() {
+    func bind() {
         vm.$inputLabelText
             .sink { [weak self] text in
                 self?.scrollView.inputLabel.text = text

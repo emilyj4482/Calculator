@@ -17,8 +17,10 @@ class HorizontalStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func layout() {
+}
+
+private extension HorizontalStackView {
+    func layout() {
         axis = .horizontal
         backgroundColor = .black
         spacing = 10
@@ -28,7 +30,7 @@ class HorizontalStackView: UIStackView {
         heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-    private func addSubviews(_ buttons: [Button]) {
+    func addSubviews(_ buttons: [Button]) {
         buttons.forEach {
             addArrangedSubview($0)
         }

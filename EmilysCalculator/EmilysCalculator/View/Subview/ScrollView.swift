@@ -28,13 +28,15 @@ class ScrollView: UIScrollView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private func addSubview() {
+}
+
+private extension ScrollView {
+    func addSubview() {
         addSubview(inputLabel)
         inputLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func layout() {
+    func layout() {
         backgroundColor = .black
         indicatorStyle = .white
         contentAlignmentPoint = CGPoint(x: 1, y: 0.5)

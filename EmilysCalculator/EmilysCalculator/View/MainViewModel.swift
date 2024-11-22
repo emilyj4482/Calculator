@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class MainViewModel {
-    
     private var cancellables = Set<AnyCancellable>()
     
     let buttons: [ButtonInfo] = [
