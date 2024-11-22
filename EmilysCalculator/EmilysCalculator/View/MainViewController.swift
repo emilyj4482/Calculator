@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
         ])
     }
     
-    // 버튼 model의 static 소스를 담은 버튼을 생성 > 버튼 4개씩 가진 h-stack view 4개 생성 > v-stack에 추가
+    // view model에 선언한 ButtonInfo array 순서에 따라 버튼 생성 > 버튼 4개씩 가진 h-stack view 4개 생성 > v-stack에 추가
     private func addButtons() {
         var hStacks = [HorizontalStackView]()
         
@@ -66,7 +66,7 @@ class MainViewController: UIViewController {
             
             for col in 0..<4 {
                 let index = row * 4 + col
-                let button = Button(buttonInfo: ButtonInfo.buttons[index])
+                let button = Button(buttonInfo: vm.buttons[index])
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
                 subviews.append(button)
             }
